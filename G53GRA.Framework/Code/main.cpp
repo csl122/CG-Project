@@ -44,12 +44,13 @@ int main(int argc, char* argv[])
 
 	// play some sound stream, looped
 	engine->play2D("./Media/back1.wav", true);
+	engine->drop();
+	engine->play2D("./Media/bell.wav");
 
 	// In a loop, wait until user presses 'q' to exit or another key to
 	// play another sound.
 
 	printf("\nHello World!\n");
-	engine->drop(); // delete engine
 
 	//do
 	//{
@@ -73,11 +74,13 @@ int main(int argc, char* argv[])
 	// Begin the main GL loop
 	scene->Run();
 
+
 	// On exit, clean up and return success (0x0)
 	delete scene;
 
+	// delete engine
+	engine->drop(); 
 
-	
 	return 0;
 
 }
