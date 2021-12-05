@@ -44,8 +44,7 @@ int main(int argc, char* argv[])
 
 	// play some sound stream, looped
 	engine->play2D("./Media/back1.wav", true);
-	engine->drop();
-	engine->play2D("./Media/bell.wav");
+	
 
 	// In a loop, wait until user presses 'q' to exit or another key to
 	// play another sound.
