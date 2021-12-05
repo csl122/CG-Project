@@ -45,6 +45,10 @@
     <Image Include="Textures\tunnelroad.bmp" />
     <Image Include="Textures\wall.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Media\back1.wav" />
+    <Media Include="Media\bell.wav" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CE3A8304-475E-425E-BA11-FDAA6293C905}</ProjectGuid>
     <RootNamespace>G53GRAFramework</RootNamespace>
@@ -70,12 +74,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\Framework;.\Code;.\Code\Demos;.\Framework\Utility;.\Framework\Interface;.\Framework\Engine;../freeglut/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\Framework;.\Code;.\Code\Demos;.\Framework\Utility;.\Framework\Interface;.\Framework\Engine;../freeglut/include;../irr/include</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../freeglut/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../freeglut/lib;../irr/lib/Win32-visualStudio;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

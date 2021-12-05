@@ -1,3 +1,3 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(459,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (G53GRA.Framework.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  TimeTunnel.cpp
+  main.cpp
   G53GRA.Framework.vcxproj -> C:\Users\csl12\OneDrive\Doc\Uni-S7\1-Computer Graphics 3069\Frameworks\base\Debug\base.exe

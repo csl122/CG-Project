@@ -119,4 +119,12 @@
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Media\back1.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="Media\bell.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
 </Project>
