@@ -1,5 +1,5 @@
 #include "MyScene.h"
-
+#include "Turntable.h"
 #include "Triangle.h"
 #include "Floor.h"
 #include "Wall.h"
@@ -22,6 +22,7 @@ void MyScene::Initialise()
 	Floor* r = new Floor("./Textures/tunnelroad.bmp", 1);
 	Wall* w = new Wall("./Textures/clwall.bmp", 1);
 	TimeTunnel* tt = new TimeTunnel("./Textures/tunnel.bmp");
+	Turntable* l = new Turntable();
 #endif
 	//Floor *f = new Floor();
 	
@@ -31,6 +32,9 @@ void MyScene::Initialise()
 	w->size(100.0f);
 	t->size(0.5f);
 	tt->size(100.0f);
+	
+	l->size(2.0f);
+	AddObjectToScene(l);
 	AddObjectToScene(f);
 	AddObjectToScene(t);
 	AddObjectToScene(w);

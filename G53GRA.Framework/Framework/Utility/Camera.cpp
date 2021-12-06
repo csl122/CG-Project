@@ -2,7 +2,7 @@
 #include "VectorMath.h"
 #include "Scene.h"
 
-Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), uKey(0), bKey(0), lKey(0), rKey(0), speed(0.85f), sensitivity(0), control(0), currentButton(0), mouseX(0), mouseY(0)
+Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), uKey(0), bKey(0), lKey(0), rKey(0), speed(5.f), sensitivity(0), control(0), currentButton(0), mouseX(0), mouseY(0)
 {
 	Reset();
 }
@@ -10,8 +10,8 @@ Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), uKey(0), bKey(0), lKey(0)
 void Camera::Reset(){
 	// set the camera position to start at (0,0,0)
 	eyePosition[0] = 0.0f;
-	eyePosition[1] = 1350.0f;
-	eyePosition[2] = 250.f;//0.8f * static_cast<float>(Scene::GetWindowHeight()) / static_cast<float>(tan(M_PI / 6.0));//0.0f;
+	eyePosition[1] = 50.0f;
+	eyePosition[2] = 935.f;//0.8f * static_cast<float>(Scene::GetWindowHeight()) / static_cast<float>(tan(M_PI / 6.0));//0.0f;
 
 	// set the view direction vector of the camera to be (0,0,-1)
 	vd[0] = 0.0f;
@@ -297,8 +297,9 @@ void Camera::HandleMouse(int button, int state, int x, int y)
 	mouseY = y;
 }
 
-void Camera::HandleMouseDrag(int x, int y)
+void Camera::HandleMouseMove(int x, int y)
 {
+
 	float rx, ry;
 	float sensitivity = 0.01f; // speed of the camera moving
 
@@ -308,9 +309,9 @@ void Camera::HandleMouseDrag(int x, int y)
 	ry = static_cast<float>(y - mouseY);
 
 	// switch on which button was pressed and only do the update if the left button was pressed
-	switch (currentButton)
+	/*switch (currentButton)
 	{
-		case GLUT_RIGHT_BUTTON:
+		case GLUT_RIGHT_BUTTON:*/
 
 			// add on the amount of change in to the left and right view direction of the camera
 			if (rx > 0)
@@ -337,14 +338,14 @@ void Camera::HandleMouseDrag(int x, int y)
 			forward[0] = vd[0];
 			forward[2] = vd[2];
 			norm(forward);
-			break;
+		/*	break;
 		case GLUT_LEFT_BUTTON:
 			break;
 		case GLUT_MIDDLE_BUTTON:
 			break;
 		default:
 			break;
-	}
+	}*/
 
 	mouseX = x;
 	mouseY = y;

@@ -69,8 +69,8 @@ public:
 	* Calculates difference in mouse position since last call and adjusts camera {@link #view} accordingly. Sensitivity is fixed at 0.01f.
 	* @see #HandleMouse(int, int, int, int)
 	*/
-	void HandleMouseDrag(int x, int y);
-	void HandleMouseMove(int x, int y){}; // unused at preset
+	void HandleMouseDrag(int x, int y) {};
+	void HandleMouseMove(int x, int y); // unused at preset
 
 	/**
 	* Called by {@link Scene} to position camera.

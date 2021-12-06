@@ -9,6 +9,7 @@ Wall::Wall(const std::string& filename, int walltype) : Wall()
 
 void Wall::Display()
 {
+
 	glPushMatrix();
 	if (type == 0)
 	{

@@ -8,10 +8,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Floor.cpp" />
+    <ClCompile Include="Code\ObjLoader.cpp" />
     <ClCompile Include="Code\TimeTunnel.cpp" />
     <ClCompile Include="Code\Triangle.cpp" />
     <ClCompile Include="Code\main.cpp" />
     <ClCompile Include="Code\MyScene.cpp" />
+    <ClCompile Include="Code\Turntable.cpp" />
     <ClCompile Include="Code\Wall.cpp" />
     <ClCompile Include="Framework\Engine\Engine.cpp" />
     <ClCompile Include="Framework\Engine\Scene.cpp" />
@@ -20,9 +22,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Floor.h" />
+    <ClInclude Include="Code\ObjLoader.h" />
     <ClInclude Include="Code\TimeTunnel.h" />
     <ClInclude Include="Code\Triangle.h" />
     <ClInclude Include="Code\MyScene.h" />
+    <ClInclude Include="Code\Turntable.h" />
     <ClInclude Include="Code\Wall.h" />
     <ClInclude Include="Framework\Engine\Engine.h" />
     <ClInclude Include="Framework\Engine\Scene.h" />
@@ -75,7 +79,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>.\Framework;.\Code;.\Code\Demos;.\Framework\Utility;.\Framework\Interface;.\Framework\Engine;../freeglut/include;../irr/include</AdditionalIncludeDirectories>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
