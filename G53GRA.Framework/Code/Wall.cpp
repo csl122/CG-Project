@@ -32,6 +32,118 @@ void Wall::Display()
 		DrawCloudWall();
 	}
 	glPopMatrix();
+
+
+	glPushMatrix();
+		glTranslatef(-1100, -100, -1098);
+
+		glPushMatrix();
+			glTranslatef(1100, 60, 0);
+			glScalef(2200, 10, 2);
+			glColor3ub(40, 100, 110);
+			DrawCube();
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(1100, 15, 0);
+			glScalef(2200, 10, 2);
+			glColor3ub(40, 100, 110);
+			DrawCube();
+		glPopMatrix();
+
+		for (size_t i = 0; i < 15; i++)
+		{
+			DrawFenceGroup();
+		}
+		glTranslatef(35, 0, 0);
+		DrawFence(240, 190, 0);
+		glTranslatef(35, 0, 0);
+		DrawFence(60, 120, 130);
+	glPopMatrix();
+
+	glPushMatrix();
+		glRotatef(90, 0, 1, 0);
+		glTranslatef(-1100, -100, -1098);
+	
+		glPushMatrix();
+		glTranslatef(1100, 60, 0);
+		glScalef(2200, 10, 2);
+		glColor3ub(40, 100, 110);
+		DrawCube();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(1100, 15, 0);
+		glScalef(2200, 10, 2);
+		glColor3ub(40, 100, 110);
+		DrawCube();
+		glPopMatrix();
+	
+		for (size_t i = 0; i < 15; i++)
+		{
+			DrawFenceGroup();
+		}
+		glTranslatef(35, 0, 0);
+		DrawFence(240, 190, 0);
+		glTranslatef(35, 0, 0);
+		DrawFence(60, 120, 130);
+	glPopMatrix();
+
+	glPushMatrix();
+		glRotatef(180, 0, 1, 0);
+		glTranslatef(-1100, -100, -1098);
+
+		glPushMatrix();
+		glTranslatef(1100, 60, 0);
+		glScalef(2200, 10, 2);
+		glColor3ub(40, 100, 110);
+		DrawCube();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(1100, 15, 0);
+		glScalef(2200, 10, 2);
+		glColor3ub(40, 100, 110);
+		DrawCube();
+		glPopMatrix();
+
+		for (size_t i = 0; i < 15; i++)
+		{
+			DrawFenceGroup();
+		}
+		glTranslatef(35, 0, 0);
+		DrawFence(240, 190, 0);
+		glTranslatef(35, 0, 0);
+		DrawFence(60, 120, 130);
+	glPopMatrix();
+
+	glPushMatrix();
+		glRotatef(270, 0, 1, 0);
+		glTranslatef(-1100, -100, -1098);
+
+		glPushMatrix();
+		glTranslatef(1100, 60, 0);
+		glScalef(2200, 10, 2);
+		glColor3ub(40, 100, 110);
+		DrawCube();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(1100, 15, 0);
+		glScalef(2200, 10, 2);
+		glColor3ub(40, 100, 110);
+		DrawCube();
+		glPopMatrix();
+
+		for (size_t i = 0; i < 15; i++)
+		{
+			DrawFenceGroup();
+		}
+		glTranslatef(35, 0, 0);
+		DrawFence(240, 190, 0);
+		glTranslatef(35, 0, 0);
+		DrawFence(60, 120, 130);
+	glPopMatrix();
 	
 }
 
@@ -146,4 +258,108 @@ void Wall::DrawCloudWall()
 
 	glPopAttrib();
 	glPopMatrix();
+}
+
+void Wall::DrawCube()
+{
+	// This function draws a unit cube centered around the origin
+
+	glBegin(GL_QUADS);
+	// Front
+	glNormal3f(0.0f, 0.0f, 1.0f);
+	glVertex3f(-0.5f, -0.5f, 0.5f);
+	glVertex3f(0.5f, -0.5f, 0.5f);
+	glVertex3f(0.5f, 0.5f, 0.5f);
+	glVertex3f(-0.5f, 0.5f, 0.5f);
+	// Back
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(-0.5f, -0.5f, -0.5f);
+	glVertex3f(-0.5f, 0.5f, -0.5f);
+	glVertex3f(0.5f, 0.5f, -0.5f);
+	glVertex3f(0.5f, -0.5f, -0.5f);
+	// Left
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(-0.5f, -0.5f, -0.5f);
+	glVertex3f(-0.5f, -0.5f, 0.5f);
+	glVertex3f(-0.5f, 0.5f, 0.5f);
+	glVertex3f(-0.5f, 0.5f, -0.5f);
+	// Right
+	glNormal3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(0.5f, -0.5f, 0.5f);
+	glVertex3f(0.5f, -0.5f, -0.5f);
+	glVertex3f(0.5f, 0.5f, -0.5f);
+	glVertex3f(0.5f, 0.5f, 0.5f);
+	// Top
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(-0.5f, 0.5f, 0.5f);
+	glVertex3f(0.5f, 0.5f, 0.5f);
+	glVertex3f(0.5f, 0.5f, -0.5f);
+	glVertex3f(-0.5f, 0.5f, -0.5f);
+	// Bottom
+	glNormal3f(0.0f, -1.0f, 0.0f);
+	glVertex3f(-0.5f, -0.5f, 0.5f);
+	glVertex3f(-0.5f, -0.5f, -0.5f);
+	glVertex3f(0.5f, -0.5f, -0.5f);
+	glVertex3f(0.5f, -0.5f, 0.5f);
+	glEnd();
+}
+
+void Wall::DrawFence(int r, int g, int b) {
+	glColor3ub(r, g, b);
+	glPushMatrix();
+
+	glPushMatrix();
+	glRotatef(180, 0, 1, 0);
+	glTranslatef(-5, 80, 0);
+	glRotatef(-30, 0, 0, 1);
+	glBegin(GL_QUADS);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(-0.f, 0.f, -2.f);
+	glVertex3f(-0.f, 0.f, 2.f);
+	glVertex3f(-0.f, 10.f, 2.f);
+	glVertex3f(-0.f, 10.f, -2.f);
+	glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-5, 80, 0);
+	glRotatef(-30, 0, 0, 1);
+	glBegin(GL_QUADS);
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glVertex3f(-0.f, 0.f, -2.f);
+	glVertex3f(-0.f, 0.f, 2.f);
+	glVertex3f(-0.f, 10.f, 2.f);
+	glVertex3f(-0.f, 10.f, -2.f);
+	glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 80, 2);
+	glBegin(GL_TRIANGLES);
+
+
+	glVertex3f(-5.0f, 0.0f, 0.0);
+	glVertex3f(5.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 5.0f * float(sqrt(3)), 0.0f);
+	// stop drawing triangles
+	glEnd();
+	glPopMatrix();
+
+	glTranslatef(0, 40, 0);
+	glScalef(10.0f, 80.0f, 4.0f);
+	DrawCube();
+
+	glPopMatrix();
+}
+
+void Wall::DrawFenceGroup()
+{
+	glTranslatef(35, 0, 0);
+	DrawFence(240, 190, 0);
+	glTranslatef(35, 0, 0);
+	DrawFence(60, 120, 130);
+	glTranslatef(35, 0, 0);
+	DrawFence(150, 30, 30);
+	glTranslatef(35, 0, 0);
+	DrawFence(60, 120, 130);
 }

@@ -33,7 +33,8 @@ void MyScene::Initialise()
 	t->size(0.5f);
 	tt->size(100.0f);
 	
-	l->size(2.0f);
+	l->size(5.0f);
+	l->position(-500, -80, -500);
 	AddObjectToScene(l);
 	AddObjectToScene(f);
 	AddObjectToScene(t);

@@ -14,6 +14,9 @@ public:
 private:
 	void DrawWall();
 	void DrawCloudWall();
+	void DrawCube();
+	void DrawFence(int r, int g, int b);
+	void DrawFenceGroup();
 	GLint texID;
 	int type;
 };
