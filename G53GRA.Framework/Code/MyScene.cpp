@@ -4,6 +4,7 @@
 #include "Floor.h"
 #include "Wall.h"
 #include "TimeTunnel.h"
+#include "Framework.h"
 
 MyScene::MyScene(int argc, char** argv, const char *title, const int& windowWidth, const int& windowHeight)
 	: Scene(argc, argv, title, windowWidth, windowHeight){}
@@ -22,25 +23,30 @@ void MyScene::Initialise()
 	Floor* r = new Floor("./Textures/tunnelroad.bmp", 1);
 	Wall* w = new Wall("./Textures/clwall.bmp", 1);
 	TimeTunnel* tt = new TimeTunnel("./Textures/tunnel.bmp");
-	Turntable* l = new Turntable();
+	
 #endif
 	//Floor *f = new Floor();
 	
 	Triangle *t = new Triangle();
+	Turntable* l = new Turntable();
+	Framework* fw = new Framework();
 	f->size(100.0f);
 	r->size(100.0f);
 	w->size(100.0f);
 	t->size(0.5f);
 	tt->size(100.0f);
-	
 	l->size(5.0f);
 	l->position(-500, -80, -500);
+	fw->size(1.2f);
+	fw->position(-1000, -80, 800);
+
 	AddObjectToScene(l);
 	AddObjectToScene(f);
 	AddObjectToScene(t);
 	AddObjectToScene(w);
 	AddObjectToScene(r);
 	AddObjectToScene(tt);
+	AddObjectToScene(fw);
 }
 
 /// set the perspective of camera
