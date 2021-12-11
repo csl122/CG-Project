@@ -262,9 +262,9 @@ void Camera::HandleSpecialKey(int key, int state, int x, int y)
 	else if (mod == GLUT_ACTIVE_CTRL) {
 		control = !control;
 		if (control)
-			speed = 0.25f;
+			speed = 2.f * speed;
 		else
-			speed = 0.7f;
+			speed = speed / 2.f;
 	}
 	else
 		bKey = 0;
