@@ -89,7 +89,7 @@ void Engine::InitFunc()
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
-	glDisable(GL_LIGHT0);
+	glEnable(GL_LIGHT0);
 
 	// Enable smooth shading from lighting
 	glShadeModel(GL_SMOOTH);

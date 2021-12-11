@@ -10,6 +10,7 @@
     <ClCompile Include="Code\Floor.cpp" />
     <ClCompile Include="Code\Framework.cpp" />
     <ClCompile Include="Code\ObjLoader.cpp" />
+    <ClCompile Include="Code\Slider.cpp" />
     <ClCompile Include="Code\Swing.cpp" />
     <ClCompile Include="Code\TimeTunnel.cpp" />
     <ClCompile Include="Code\Triangle.cpp" />
@@ -26,6 +27,7 @@
     <ClInclude Include="Code\Floor.h" />
     <ClInclude Include="Code\Framework.h" />
     <ClInclude Include="Code\ObjLoader.h" />
+    <ClInclude Include="Code\Slider.h" />
     <ClInclude Include="Code\Swing.h" />
     <ClInclude Include="Code\TimeTunnel.h" />
     <ClInclude Include="Code\Triangle.h" />

@@ -6,6 +6,7 @@
 #include "TimeTunnel.h"
 #include "Framework.h"
 #include "Swing.h"
+#include "Slider.h"
 
 MyScene::MyScene(int argc, char** argv, const char *title, const int& windowWidth, const int& windowHeight)
 	: Scene(argc, argv, title, windowWidth, windowHeight){}
@@ -32,6 +33,7 @@ void MyScene::Initialise()
 	Turntable* l = new Turntable();
 	Framework* fw = new Framework();
 	Swing* sw = new Swing();
+	Slider* sl = new Slider();
 	f->size(100.0f);
 	r->size(100.0f);
 	w->size(100.0f);
@@ -43,6 +45,8 @@ void MyScene::Initialise()
 	fw->position(-1000, -110, 800);
 	sw->size(1.0f);
 	sw->position(1500, 0, -1000);
+	sl->size(0.8f);
+	sl->position(1200, 20, -200);
 
 	AddObjectToScene(l);
 	AddObjectToScene(f);
@@ -52,6 +56,7 @@ void MyScene::Initialise()
 	AddObjectToScene(tt);
 	AddObjectToScene(fw);
 	AddObjectToScene(sw);
+	AddObjectToScene(sl);
 }
 
 /// set the perspective of camera
