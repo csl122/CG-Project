@@ -2,7 +2,7 @@
 #include "VectorMath.h"
 #include "Scene.h"
 
-Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), uKey(0), bKey(0), lKey(0), rKey(0), speed(8.f), sensitivity(0), control(0), currentButton(0), mouseX(0), mouseY(0)
+Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), uKey(0), bKey(0), lKey(0), rKey(0), speed(8.f), sensitivity(1.f), control(0), currentButton(0), mouseX(0), mouseY(0)
 {
 	Reset();
 }
@@ -142,6 +142,8 @@ void Camera::Update(const double& deltaTime)
 	if (bKey)
 		if (eyePosition[1] >= btlimit)
 			sub(eyePosition, up, speed);
+
+	sensitivity = 0.1f;
 
 	if (lKey) {
 		sub(vd, right, sensitivity);

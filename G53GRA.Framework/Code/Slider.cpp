@@ -75,7 +75,7 @@ void Slider::drawCylinder(GLdouble r, GLdouble h)
 	glPushMatrix();
 	glRotatef(-90, 1, 0, 0);
 	cylinder = gluNewQuadric();
-	gluCylinder(cylinder, r, r, h, 60, 1);
+	gluCylinder(cylinder, r, r, h, 10, 1);
 	glPopMatrix();
 
 }
@@ -157,7 +157,7 @@ void Slider::DrawSliderPlatform()
 	GLUquadricObj* cylinder;
 	glRotatef(-90, 1, 0, 0);
 	cylinder = gluNewQuadric();
-	gluCylinder(cylinder, 15, 20, 10, 20, 1);
+	gluCylinder(cylinder, 15, 20, 10, 10, 1);
 	glPopMatrix();
 
 	// platform

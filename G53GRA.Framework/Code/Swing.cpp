@@ -75,7 +75,7 @@ void Swing::drawCylinder(GLdouble r, GLdouble h)
 	glPushMatrix();
 	glRotatef(-90, 1, 0, 0);
 	cylinder = gluNewQuadric();
-	gluCylinder(cylinder, r, r, h, 60, 1);
+	gluCylinder(cylinder, r, r, h, 10, 1);
 	glPopMatrix();
 
 }

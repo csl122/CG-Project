@@ -8,6 +8,7 @@ Framework::Framework(const std::string& filename) : Framework()
 
 void Framework::Display()
 {
+	glPushMatrix();
 	// Save current style attributes
 	glPushAttrib(GL_ALL_ATTRIB_BITS);
 	// Set colour to pale grey
@@ -20,6 +21,7 @@ void Framework::Display()
 
 	// Revert style attributes
 	glPopAttrib();
+	glPopMatrix();
 }
 
 void Framework::drawCylinder(GLdouble r, GLdouble h)
@@ -28,7 +30,7 @@ void Framework::drawCylinder(GLdouble r, GLdouble h)
 	glPushMatrix();
 	glRotatef(-90, 1, 0, 0);
 	cylinder = gluNewQuadric();
-	gluCylinder(cylinder, r, r, h, 60, 1);
+	gluCylinder(cylinder, r, r, h, 10, 1);
 	glPopMatrix();
 
 }

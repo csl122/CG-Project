@@ -235,7 +235,7 @@ void Turntable::drawCylinder(GLdouble r, GLdouble h)
 
 	cylinder = gluNewQuadric();
 
-	gluCylinder(cylinder, r, r, h, 60, 1);
+	gluCylinder(cylinder, r, r, h, 10, 1);
 	glPopMatrix();
 
 }

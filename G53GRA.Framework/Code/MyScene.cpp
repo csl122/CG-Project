@@ -7,6 +7,7 @@
 #include "Framework.h"
 #include "Swing.h"
 #include "Slider.h"
+#include "Doors.h"
 
 MyScene::MyScene(int argc, char** argv, const char *title, const int& windowWidth, const int& windowHeight)
 	: Scene(argc, argv, title, windowWidth, windowHeight){}
@@ -34,6 +35,7 @@ void MyScene::Initialise()
 	Framework* fw = new Framework();
 	Swing* sw = new Swing();
 	Slider* sl = new Slider();
+	Doors* dr = new Doors();
 	f->size(100.0f);
 	r->size(100.0f);
 	w->size(100.0f);
@@ -44,10 +46,15 @@ void MyScene::Initialise()
 	fw->size(1.2f);
 	fw->position(-1000, -110, 800);
 	sw->size(1.0f);
-	sw->position(1500, 0, -1000);
-	sl->size(0.8f);
-	sl->position(1200, 20, -200);
+	sw->position(800, -110, -400);
+	sl->size(0.9f);
+	sl->position(560, -90, 470);
+	dr->size(50.f);
+	dr->position(0, 20, -500);
 
+
+
+AddObjectToScene(dr);
 	AddObjectToScene(l);
 	AddObjectToScene(f);
 	AddObjectToScene(t);
@@ -57,6 +64,7 @@ void MyScene::Initialise()
 	AddObjectToScene(fw);
 	AddObjectToScene(sw);
 	AddObjectToScene(sl);
+	
 }
 
 /// set the perspective of camera

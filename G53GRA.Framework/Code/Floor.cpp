@@ -9,6 +9,8 @@ Floor::Floor(const std::string& filename, int floortype) : Floor()
 
 void Floor::Display()
 {
+	// Always push before making any changes
+	glPushMatrix();
 	if (type == 0)
 	{
 		DrawSand();
@@ -17,6 +19,7 @@ void Floor::Display()
 	{
 		DrawPath();
 	}
+	glPopMatrix();
 
 }
 
