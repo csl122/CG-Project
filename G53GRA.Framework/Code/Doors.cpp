@@ -1,4 +1,5 @@
 #include "Doors.h"
+#define PI acos(-1)
 
 
 Doors::Doors(const std::string& filename) : Doors()
@@ -37,19 +38,67 @@ void Doors::drawCylinder(GLdouble r, GLdouble h)
 
 void Doors::DrawDoors()
 {
+	// circle
 	glPushMatrix();
+	glTranslatef(-300, 0, 0);
+	glRotatef(90, 1, 0, 0);
+	glScalef(60, 60, 60);
 	glDisable(GL_CULL_FACE);
-	
+	glColor3ub(60, 120, 130);
+	float h = 0.25;
+	float scale = 0.7;
+
 	glBegin(GL_QUAD_STRIP);//连续填充四边形串
 	int i = 0;
-	for (i = 390; i >= 0; i -= 15)
+	for (i = 360; i >= 0; i -= 15)
 	{
-		float p = i * 3.14 / 180;
-		glVertex3f(sin(p), cos(p), 1.0f);
-		glVertex3f(sin(p), cos(p), 0.0f);
+		float p = i * PI / 180;
+		float x = float(sin(p));
+		float z = float(cos(p));
+		glNormal3f(x, h, z);
+		glVertex3f(x, h, z);
+		glNormal3f(x, 0.0f, z);
+		glVertex3f(x, 0.0f, z);
+
+		
+	}
+	glEnd();
+
+	glBegin(GL_QUAD_STRIP);//连续填充四边形串
+	i = 0;
+	for (i = 360; i >= 0; i -= 15)
+	{
+		float p = i * PI / 180;
+		float x = float(sin(p));
+		float z = float(cos(p));
+
+		// inner
+		glNormal3f(-scale * x, -h, -scale * z);
+		glVertex3f(scale * x, h, scale * z);
+		glNormal3f(-scale * x, 0.0f, -scale * z);
+		glVertex3f(scale * x, 0.0f, scale * z);
+	}
+	glEnd();
+
+	glBegin(GL_QUAD_STRIP);//连续填充四边形串
+	i = 0;
+	for (i = 360; i >= 0; i -= 15)
+	{
+		float p = i * PI / 180;
+		float x = float(sin(p));
+		float z = float(cos(p));
+
+		// inner
+		glNormal3f(0, 1, 0);
+		glVertex3f(scale * x, h, scale * z);
+		glNormal3f(0, 1, 0);
+		glVertex3f(1 * x, h, 1 * z);
 	}
 	glEnd();
 
 	glEnable(GL_CULL_FACE);
 	glPopMatrix();
+
+
+
 }

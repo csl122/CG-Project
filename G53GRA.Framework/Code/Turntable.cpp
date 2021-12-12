@@ -329,11 +329,13 @@ void Turntable::CurvedCylinder(GLfloat radius, GLfloat height)
 			xb = sin(ang0) * x;
 			yb = y;
 			zb = cos(ang0) * x;
+			glNormal3f(xb, yb, zb);
 			glVertex3f(xb, yb, zb);
 
 			xb = sin(ang1) * x;
 			yb = y;
 			zb = cos(ang1) * x;
+			glNormal3f(xb, yb, zb);
 			glVertex3f(xb, yb, zb);
 		}
 		glEnd();

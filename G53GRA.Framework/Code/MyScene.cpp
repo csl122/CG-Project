@@ -49,8 +49,8 @@ void MyScene::Initialise()
 	sw->position(800, -110, -400);
 	sl->size(0.9f);
 	sl->position(560, -90, 470);
-	dr->size(50.f);
-	dr->position(0, 20, -500);
+	dr->size(1.f);
+	dr->position(0, 80, -1100);
 
 
 

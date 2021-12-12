@@ -383,12 +383,15 @@ void Slider::DrawSliderSlider()
 
 	glColor3ub(30, 50, 100);
 	glBegin(GL_QUAD_STRIP);
+	glNormal3f(0, 1.0f, 0);
 	glVertex3f(-75, 397.f, 55.f);
+	glNormal3f(1, float(sqrt(3)), 0);
 	glVertex3f(-75, 397.f, -55.f);
 	glVertex3f(-90, 397.f, 55.f);
 	glVertex3f(-90, 397.f, -55.f);
 	glVertex3f(-100.f - 380 * float(sqrt(3)), 0.f, 55.f);
 	glVertex3f(-100.f - 380 * float(sqrt(3)), 0.f, -55.f);
+	glNormal3f(0, 1.0f, 0);
 	glVertex3f(-855, 0.f, 55.f);
 	glVertex3f(-855, 0.f, -55.f);
 
