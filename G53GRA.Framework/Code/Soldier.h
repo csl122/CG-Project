@@ -4,12 +4,12 @@
 #include "Functions.h"
 #include "ObjectFileReader.h"
 
-class ModelObject :
+class Soldier :
 	public WorldObject
 {
 public:
-	ModelObject(MyScene* scene, string filePath, Vertex* color, int winding);
-	~ModelObject();
+	Soldier(MyScene* scene, string filePath, string fileName2, Vertex* color, int winding);
+	~Soldier();
 	void Display();
 	void Update(const double& deltaTime);
 
@@ -40,6 +40,7 @@ public:
 	string _tex_path;
 	string _tex_path2;
 	string _filename;
+	string _filename2;
 	bool ifWin;
 
 	int _texID;

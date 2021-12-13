@@ -4,12 +4,12 @@
 #include "Functions.h"
 #include "ObjectFileReader.h"
 
-class ModelObject :
+class Doll :
 	public WorldObject
 {
 public:
-	ModelObject(MyScene* scene, string filePath, Vertex* color, int winding);
-	~ModelObject();
+	Doll(MyScene* scene, string filePath, Vertex* color, int winding);
+	~Doll();
 	void Display();
 	void Update(const double& deltaTime);
 

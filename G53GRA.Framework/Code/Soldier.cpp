@@ -1,14 +1,15 @@
-#include "ModelObject.h"
+#include "Soldier.h"
 
-ModelObject::ModelObject(MyScene* scene, string fileName, Vertex* color, int winding) : WorldObject(scene, 0, "test", 0),
-scene(scene), _flagAutospin(false),ifWin(false),
+Soldier::Soldier(MyScene* scene, string fileName, string fileName2, Vertex* color, int winding) : WorldObject(scene, 0, "test", 0),
+scene(scene), _flagAutospin(false), ifWin(false),
 _flagReset(false), _iKey(false), _jKey(false), _kKey(false),
 _lKey(false), _oKey(false), _uKey(false), _plusKey(false), _minusKey(false),
 _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 {
 	_filename = fileName;
+	_filename2 = fileName2;
 	_obj_path = "./Obj/" + _filename + ".obj";
-	_tex_path = "./Textures/" + _filename + ".bmp";
+	_tex_path = "./Textures/squid.bmp";
 	//_tex_path2 = "Texture/" + fileName + "2.bmp";
 	defaultColor = color;
 
@@ -41,16 +42,16 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 	size(_INIT_SIZE);
 	pos[2] = _DEF_Z * 2;
 
-	
+
 	//_texID2 = scene->GetTexture(_tex_path2);
 }
 
 
-ModelObject::~ModelObject()
+Soldier::~Soldier()
 {
 }
 
-void ModelObject::Display() {
+void Soldier::Display() {
 	glDisable(GL_CULL_FACE);
 	glPushMatrix();
 	glTranslatef(pos[0], pos[1], pos[2]);
@@ -78,7 +79,7 @@ void ModelObject::Display() {
 	glEnable(GL_CULL_FACE);
 }
 
-void ModelObject::Render() {
+void Soldier::Render() {
 	//glEnable(GL_TEXTURE_2D);
 	//glEnable(GL_COLOR_MATERIAL);
 
@@ -109,7 +110,7 @@ void ModelObject::Render() {
 
 }
 
-void ModelObject::RenderFace(Face* face) {
+void Soldier::RenderFace(Face* face) {
 
 	vector<Vertex*>* faceData = face->faceData;
 
@@ -131,32 +132,32 @@ void ModelObject::RenderFace(Face* face) {
 	}
 }
 
-void ModelObject::RenderVertex(int vertexIndex) {
+void Soldier::RenderVertex(int vertexIndex) {
 	Vertex* vertexCoordinates = vertices[vertexIndex];
 	glVertex3f(vertexCoordinates->x, vertexCoordinates->y, vertexCoordinates->z);
 }
 
-void ModelObject::RenderNormal(int normalIndex) {
+void Soldier::RenderNormal(int normalIndex) {
 	auto normal = normals[normalIndex];
 	glNormal3f(normal->x, normal->y, normal->z);
 	//glColor3f(normal->x, normal->y, normal->z);
 }
 
-void ModelObject::RenderMaterial(int materialIndex) {
+void Soldier::RenderMaterial(int materialIndex) {
 	float* materialCoordinate = textureCoordinates[materialIndex];
 	float one = materialCoordinate[0];
 	float two = materialCoordinate[1];
 	glTexCoord2f(materialCoordinate[0], materialCoordinate[1]);
 }
 
-void ModelObject::setScale(Vertex* size) {
+void Soldier::setScale(Vertex* size) {
 	this->vSize = size;
 	scale[0] = vSize->x;
 	scale[1] = vSize->y;
 	scale[2] = vSize->z;
 }
 
-void ModelObject::setPosition(Vertex* position) {
+void Soldier::setPosition(Vertex* position) {
 	this->vPosition = position;
 	//position(vPosition->x, vPosition->y, vPosition->z);
 	pos[0] = vPosition->x;
@@ -165,7 +166,7 @@ void ModelObject::setPosition(Vertex* position) {
 
 }
 
-void ModelObject::setOrientation(Vertex* orientation) {
+void Soldier::setOrientation(Vertex* orientation) {
 	this->vOrientation = orientation;
 	rotation[0] = vOrientation->x;
 	rotation[1] = vOrientation->y;
@@ -174,7 +175,7 @@ void ModelObject::setOrientation(Vertex* orientation) {
 
 #include <mmsystem.h>
 #pragma comment(lib, "winmm.lib")
-void ModelObject::Update(const double& deltaTime) {
+void Soldier::Update(const double& deltaTime) {
 	float velocity = 100.0f * static_cast<float>(deltaTime);
 	float shrinkRate = -5.0f * static_cast<float>(deltaTime);
 
@@ -200,14 +201,14 @@ void ModelObject::Update(const double& deltaTime) {
 	Camera* camera = Scene::GetCamera();
 	camera->GetEyePosition(x, y, z);
 
-	if ( !ifWin && z < -700 && abs(y - (50)) < 10)
+	if (!ifWin && z < -700 && abs(y - (50)) < 10)
 	{
 		ifWin = true;
 		_filename = "gun";
-		_obj_path = "./Obj/" + _filename + ".obj";
-		_tex_path = "./Textures/" + _filename + ".bmp";
+		_obj_path = "./Obj/" + _filename2 + ".obj";
+		_tex_path = "./Textures/squid.bmp";
 		//_tex_path2 = "Texture/" + fileName + "2.bmp";
-		
+
 
 		objectFileReader = new ObjectFileReader(_obj_path);
 		objectFileReader->Load();
@@ -219,6 +220,8 @@ void ModelObject::Update(const double& deltaTime) {
 		faceMaterials = objectFileReader->faceMaterials;
 
 		_texID = scene->GetTexture(_tex_path);
+
+		pos[0] = 1.5 * pos[0];
 		//camera->SetCameraPosition(0.f, 50.f, 935.f); //(0.f ,50.f, 935.f)(0., 1350.0f, 500.)
 	}
 
@@ -331,7 +334,7 @@ void ModelObject::Update(const double& deltaTime) {
 }
 
 
-void ModelObject::HandleKey(unsigned char key, int state, int x, int y)
+void Soldier::HandleKey(unsigned char key, int state, int x, int y)
 {
 	/*
 	This function is called continuously when a key is pressed AND when
@@ -384,7 +387,7 @@ void ModelObject::HandleKey(unsigned char key, int state, int x, int y)
 	}
 }
 
-void ModelObject::HandleSpecialKey(int key, int state, int x, int y)
+void Soldier::HandleSpecialKey(int key, int state, int x, int y)
 {
 	/*
 	This function is called continuously when a special key is pressed

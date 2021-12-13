@@ -16,6 +16,7 @@
     <ClCompile Include="Code\ObjectFileReader.cpp" />
     <ClCompile Include="Code\ObjLoader.cpp" />
     <ClCompile Include="Code\Slider.cpp" />
+    <ClCompile Include="Code\Soldier.cpp" />
     <ClCompile Include="Code\Swing.cpp" />
     <ClCompile Include="Code\TimeTunnel.cpp" />
     <ClCompile Include="Code\Tri.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="Code\ObjectFileReader.h" />
     <ClInclude Include="Code\ObjLoader.h" />
     <ClInclude Include="Code\Slider.h" />
+    <ClInclude Include="Code\Soldier.h" />
     <ClInclude Include="Code\Swing.h" />
     <ClInclude Include="Code\TimeTunnel.h" />
     <ClInclude Include="Code\Tri.h" />
