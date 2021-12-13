@@ -8,17 +8,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\Doors.cpp" />
+    <ClCompile Include="Code\Face.cpp" />
     <ClCompile Include="Code\Floor.cpp" />
     <ClCompile Include="Code\Framework.cpp" />
+    <ClCompile Include="Code\Functions.cpp" />
+    <ClCompile Include="Code\ModelObject.cpp" />
+    <ClCompile Include="Code\ObjectFileReader.cpp" />
     <ClCompile Include="Code\ObjLoader.cpp" />
     <ClCompile Include="Code\Slider.cpp" />
     <ClCompile Include="Code\Swing.cpp" />
     <ClCompile Include="Code\TimeTunnel.cpp" />
+    <ClCompile Include="Code\Tri.cpp" />
     <ClCompile Include="Code\Triangle.cpp" />
     <ClCompile Include="Code\main.cpp" />
     <ClCompile Include="Code\MyScene.cpp" />
+    <ClCompile Include="Code\Triforce.cpp" />
     <ClCompile Include="Code\Turntable.cpp" />
+    <ClCompile Include="Code\Vertex.cpp" />
     <ClCompile Include="Code\Wall.cpp" />
+    <ClCompile Include="Code\WorldObject.cpp" />
     <ClCompile Include="Framework\Engine\Engine.cpp" />
     <ClCompile Include="Framework\Engine\Scene.cpp" />
     <ClCompile Include="Framework\Utility\Camera.cpp" />
@@ -26,16 +34,24 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\Doors.h" />
+    <ClInclude Include="Code\Face.h" />
     <ClInclude Include="Code\Floor.h" />
     <ClInclude Include="Code\Framework.h" />
+    <ClInclude Include="Code\Functions.h" />
+    <ClInclude Include="Code\ModelObject.h" />
+    <ClInclude Include="Code\ObjectFileReader.h" />
     <ClInclude Include="Code\ObjLoader.h" />
     <ClInclude Include="Code\Slider.h" />
     <ClInclude Include="Code\Swing.h" />
     <ClInclude Include="Code\TimeTunnel.h" />
+    <ClInclude Include="Code\Tri.h" />
     <ClInclude Include="Code\Triangle.h" />
     <ClInclude Include="Code\MyScene.h" />
+    <ClInclude Include="Code\Triforce.h" />
     <ClInclude Include="Code\Turntable.h" />
+    <ClInclude Include="Code\Vertex.h" />
     <ClInclude Include="Code\Wall.h" />
+    <ClInclude Include="Code\WorldObject.h" />
     <ClInclude Include="Framework\Engine\Engine.h" />
     <ClInclude Include="Framework\Engine\Scene.h" />
     <ClInclude Include="Framework\Interface\Animation.h" />
@@ -46,6 +62,7 @@
     <ClInclude Include="Framework\Utility\VectorMath.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Textures\squid.bmp" />
     <Image Include="Textures\batmanlogo.bmp" />
     <Image Include="Textures\cloudwall.bmp" />
     <Image Include="Textures\clwall.bmp" />
@@ -60,6 +77,9 @@
   <ItemGroup>
     <Media Include="Media\back1.wav" />
     <Media Include="Media\bell.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Obj\pink soldier.mtl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{CE3A8304-475E-425E-BA11-FDAA6293C905}</ProjectGuid>

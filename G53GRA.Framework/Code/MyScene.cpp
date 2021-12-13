@@ -8,6 +8,8 @@
 #include "Swing.h"
 #include "Slider.h"
 #include "Doors.h"
+#include "Triforce.h"
+#include "ModelObject.h"
 
 MyScene::MyScene(int argc, char** argv, const char *title, const int& windowWidth, const int& windowHeight)
 	: Scene(argc, argv, title, windowWidth, windowHeight){}
@@ -36,6 +38,7 @@ void MyScene::Initialise()
 	Swing* sw = new Swing();
 	Slider* sl = new Slider();
 	Doors* dr = new Doors();
+	Triforce* tf = new Triforce();
 	f->size(100.0f);
 	r->size(100.0f);
 	w->size(100.0f);
@@ -51,6 +54,8 @@ void MyScene::Initialise()
 	sl->position(560, -90, 470);
 	dr->size(1.f);
 	dr->position(0, 80, -1100);
+	tf->size(1.f);
+	tf->position(0,20, 0);
 
 
 
@@ -64,7 +69,36 @@ AddObjectToScene(dr);
 	AddObjectToScene(fw);
 	AddObjectToScene(sw);
 	AddObjectToScene(sl);
+	//AddObjectToScene(tf);
 	
+
+
+	Vertex* objScale = new Vertex(35, 35, 35);
+	Vertex* soldierP = new Vertex(-300, -100, -1000);
+	ModelObject* soldier = new ModelObject(this, "squid", new Vertex(.3f, .3f, .4f), GL_CCW);
+	soldier->setScale(objScale);
+	soldier->setPosition(soldierP);
+	soldier->setOrientation(new Vertex(0, 180, 0));
+	AddObjectToScene(soldier);
+
+	ModelObject* gun = new ModelObject(this, "gun", new Vertex(.3f, .3f, .4f), GL_CCW);
+	gun->setScale(objScale);
+	gun->setPosition(soldierP);
+	gun->setOrientation(new Vertex(0, 180, 0));
+	AddObjectToScene(gun);
+
+	Vertex* soldier2P = new Vertex(300, -100, -1000);
+	ModelObject* soldier2 = new ModelObject(this, "squid", new Vertex(.3f, .3f, .4f), GL_CCW);
+	soldier2->setScale(objScale);
+	soldier2->setPosition(soldier2P);
+	soldier2->setOrientation(new Vertex(0, 180, 0));
+	AddObjectToScene(soldier2);
+
+	ModelObject* gun2 = new ModelObject(this, "gun", new Vertex(.3f, .3f, .4f), GL_CCW);
+	gun2->setScale(objScale);
+	gun2->setPosition(soldier2P);
+	gun2->setOrientation(new Vertex(0, 180, 0));
+	AddObjectToScene(gun2);
 }
 
 /// set the perspective of camera
