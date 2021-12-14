@@ -178,47 +178,29 @@ void Doll::Update(const double& deltaTime) {
 	float velocity = 100.0f * static_cast<float>(deltaTime);
 	float shrinkRate = -5.0f * static_cast<float>(deltaTime);
 
-	/*if (abs(scene->rx) > 10) rotation[1] += scene->rx / 16.f;
-	if (abs(scene->ry) > 10) rotation[0] -= scene->ry / 16.f;
-
-	if (abs(scene->lx) > 10) pos[0] += scene->lx / 128.0f;
-	if (abs(scene->ly) > 10) pos[2] += scene->ly / 128.0f;
-
-	if (abs(scene->lt) > 10) {
-		scale[0] += shrinkRate * scene->lt / 128.0f;
-		scale[1] += shrinkRate * scene->lt / 128.0f;
-		scale[2] += shrinkRate * scene->lt / 128.0f;
-	}
-
-	if (abs(scene->rt) > 10) {
-		scale[0] -= shrinkRate * scene->rt / 128.0f;
-		scale[1] -= shrinkRate * scene->rt / 128.0f;
-		scale[2] -= shrinkRate * scene->rt / 128.0f;
-	}*/
-
 	float x, y, z;
 	Camera* camera = Scene::GetCamera();
 	camera->GetEyePosition(x, y, z);
 
 	if (!ifWin && z < -700 && abs(y - (50)) < 10)
 	{
-		ifWin = true;
-		_filename = "gun";
-		_obj_path = "./Obj/" + _filename + ".obj";
-		_tex_path = "./Textures/" + _filename + ".bmp";
-		//_tex_path2 = "Texture/" + fileName + "2.bmp";
+		//ifWin = true;
+		//_filename = "gun";
+		//_obj_path = "./Obj/" + _filename + ".obj";
+		//_tex_path = "./Textures/" + _filename + ".bmp";
+		////_tex_path2 = "Texture/" + fileName + "2.bmp";
 
 
-		objectFileReader = new ObjectFileReader(_obj_path);
-		objectFileReader->Load();
+		//objectFileReader = new ObjectFileReader(_obj_path);
+		//objectFileReader->Load();
 
-		vertices = objectFileReader->vertices;
-		normals = objectFileReader->normals;
-		textureCoordinates = objectFileReader->textureCoordinates;
-		faces = objectFileReader->faces;
-		faceMaterials = objectFileReader->faceMaterials;
+		//vertices = objectFileReader->vertices;
+		//normals = objectFileReader->normals;
+		//textureCoordinates = objectFileReader->textureCoordinates;
+		//faces = objectFileReader->faces;
+		//faceMaterials = objectFileReader->faceMaterials;
 
-		_texID = scene->GetTexture(_tex_path);
+		//_texID = scene->GetTexture(_tex_path);
 		//camera->SetCameraPosition(0.f, 50.f, 935.f); //(0.f ,50.f, 935.f)(0., 1350.0f, 500.)
 	}
 

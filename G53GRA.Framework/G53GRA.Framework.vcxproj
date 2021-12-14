@@ -7,6 +7,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Doll.cpp" />
     <ClCompile Include="Code\Doors.cpp" />
     <ClCompile Include="Code\Face.cpp" />
     <ClCompile Include="Code\Floor.cpp" />
@@ -34,6 +35,7 @@
     <ClCompile Include="Framework\Utility\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Code\Doll.h" />
     <ClInclude Include="Code\Doors.h" />
     <ClInclude Include="Code\Face.h" />
     <ClInclude Include="Code\Floor.h" />

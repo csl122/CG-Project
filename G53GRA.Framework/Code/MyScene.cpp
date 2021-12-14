@@ -11,6 +11,7 @@
 #include "Triforce.h"
 #include "ModelObject.h"
 #include "Soldier.h"
+#include "Doll.h"
 
 MyScene::MyScene(int argc, char** argv, const char *title, const int& windowWidth, const int& windowHeight)
 	: Scene(argc, argv, title, windowWidth, windowHeight){}
@@ -89,6 +90,13 @@ AddObjectToScene(dr);
 	soldier2->setPosition(soldier2P);
 	soldier2->setOrientation(new Vertex(0, 180, 0));
 	AddObjectToScene(soldier2);
+
+	Vertex* dollP = new Vertex(0, -100, -1000);
+	Doll* doll = new Doll(this, "body", new Vertex(.3f, .3f, .4f), GL_CCW);
+	doll->setScale(objScale);
+	doll->setPosition(dollP);
+	doll->setOrientation(new Vertex(0, 180, 0));
+	AddObjectToScene(doll);
 
 }
 
