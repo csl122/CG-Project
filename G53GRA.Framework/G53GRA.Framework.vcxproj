@@ -13,6 +13,7 @@
     <ClCompile Include="Code\Floor.cpp" />
     <ClCompile Include="Code\Framework.cpp" />
     <ClCompile Include="Code\Functions.cpp" />
+    <ClCompile Include="Code\Head.cpp" />
     <ClCompile Include="Code\ModelObject.cpp" />
     <ClCompile Include="Code\ObjectFileReader.cpp" />
     <ClCompile Include="Code\ObjLoader.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="Code\Floor.h" />
     <ClInclude Include="Code\Framework.h" />
     <ClInclude Include="Code\Functions.h" />
+    <ClInclude Include="Code\Head.h" />
     <ClInclude Include="Code\ModelObject.h" />
     <ClInclude Include="Code\ObjectFileReader.h" />
     <ClInclude Include="Code\ObjLoader.h" />
