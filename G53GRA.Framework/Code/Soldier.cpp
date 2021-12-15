@@ -1,5 +1,7 @@
 #include "Soldier.h"
 
+bool Soldier::_flagLose = false;
+
 Soldier::Soldier(MyScene* scene, string fileName, string fileName2, Vertex* color, int winding) : WorldObject(scene, 0, "test", 0),
 scene(scene), _flagAutospin(false), ifWin(false),
 _flagReset(false), _iKey(false), _jKey(false), _kKey(false),
@@ -42,7 +44,7 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 	size(_INIT_SIZE);
 	pos[2] = _DEF_Z * 2;
 
-
+	
 	//_texID2 = scene->GetTexture(_tex_path2);
 }
 
@@ -50,6 +52,12 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 Soldier::~Soldier()
 {
 }
+
+void Soldier::SetLose(bool flag)
+{
+	_flagLose = flag;
+}
+
 
 void Soldier::Display() {
 	glDisable(GL_CULL_FACE);
@@ -173,38 +181,17 @@ void Soldier::setOrientation(Vertex* orientation) {
 	rotation[2] = vOrientation->z;
 }
 
-#include <mmsystem.h>
-#pragma comment(lib, "winmm.lib")
 void Soldier::Update(const double& deltaTime) {
 	float velocity = 100.0f * static_cast<float>(deltaTime);
 	float shrinkRate = -5.0f * static_cast<float>(deltaTime);
-
-	/*if (abs(scene->rx) > 10) rotation[1] += scene->rx / 16.f;
-	if (abs(scene->ry) > 10) rotation[0] -= scene->ry / 16.f;
-
-	if (abs(scene->lx) > 10) pos[0] += scene->lx / 128.0f;
-	if (abs(scene->ly) > 10) pos[2] += scene->ly / 128.0f;
-
-	if (abs(scene->lt) > 10) {
-		scale[0] += shrinkRate * scene->lt / 128.0f;
-		scale[1] += shrinkRate * scene->lt / 128.0f;
-		scale[2] += shrinkRate * scene->lt / 128.0f;
-	}
-
-	if (abs(scene->rt) > 10) {
-		scale[0] -= shrinkRate * scene->rt / 128.0f;
-		scale[1] -= shrinkRate * scene->rt / 128.0f;
-		scale[2] -= shrinkRate * scene->rt / 128.0f;
-	}*/
 
 	float x, y, z;
 	Camera* camera = Scene::GetCamera();
 	camera->GetEyePosition(x, y, z);
 
-	if (!ifWin && z < -700 && abs(y - (50)) < 10)
+	if (!ifWin && z < -700 && abs(y - (50)) < 10 && !_flagLose)
 	{
 		ifWin = true;
-		_filename = "gun";
 		_obj_path = "./Obj/" + _filename2 + ".obj";
 		_tex_path = "./Textures/squid.bmp";
 		//_tex_path2 = "Texture/" + fileName + "2.bmp";
@@ -228,7 +215,22 @@ void Soldier::Update(const double& deltaTime) {
 	// Spacebar will reset transformation values
 	if (_flagReset)
 	{
-		PlaySound(TEXT("naruto.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		ifWin = false;
+		_obj_path = "./Obj/" + _filename + ".obj";
+		_tex_path = "./Textures/squid.bmp";
+		//_tex_path2 = "Texture/" + fileName + "2.bmp";
+
+
+		objectFileReader = new ObjectFileReader(_obj_path);
+		objectFileReader->Load();
+
+		vertices = objectFileReader->vertices;
+		normals = objectFileReader->normals;
+		textureCoordinates = objectFileReader->textureCoordinates;
+		faces = objectFileReader->faces;
+		faceMaterials = objectFileReader->faceMaterials;
+
+		_texID = scene->GetTexture(_tex_path);
 		size(vSize->x, vSize->y, vSize->z);
 		position(vPosition->x, vPosition->y, vPosition->z);
 		orientation(vOrientation->x, vOrientation->y, vOrientation->z);
@@ -302,7 +304,7 @@ void Soldier::Update(const double& deltaTime) {
 	*/
 	float current = rotation[1];
 
-	if (_upKey) {
+	/*if (_upKey) {
 		pos[2] -= velocity;
 
 		if (rotation[1] > -180.0) rotation[1] -= 30;
@@ -323,14 +325,14 @@ void Soldier::Update(const double& deltaTime) {
 		pos[0] += velocity;
 		if (rotation[1] > 90) rotation[1] -= 30;
 		if (rotation[1] < 90) rotation[1] += 30;
-	}
+	}*/
 
-	if (_pageDn) {
+	/*if (_pageDn) {
 		pos[1] -= velocity;
 	}
 	if (_pageUp) {
 		pos[1] += velocity;
-	}
+	}*/
 }
 
 

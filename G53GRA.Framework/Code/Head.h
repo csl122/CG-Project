@@ -63,6 +63,7 @@ private:
 	GLboolean _iKey, _jKey, _kKey, _lKey, _oKey, _uKey;
 	GLboolean _plusKey, _minusKey, _upKey, _downKey, _leftKey, _rightKey, _pageUp, _pageDn;
 	GLboolean _flagReset, _flagAutospin;
+	GLboolean _flagMove, _flagLose, _flagStart;
 
 	GLfloat* _mat_ambient, * _mat_diffuse, * _mat_specular, * _mat_shininess;
 };

@@ -19,6 +19,7 @@ public:
 	void setScale(Vertex* size);
 	void setPosition(Vertex* position);
 	void setOrientation(Vertex* orientation);
+	static void Soldier::SetLose(bool flag);
 
 	Vertex* vSize;
 	Vertex* vPosition;
@@ -42,6 +43,7 @@ public:
 	string _filename;
 	string _filename2;
 	bool ifWin;
+	static bool _flagLose;
 
 	int _texID;
 	int _texID2;

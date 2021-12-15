@@ -13,6 +13,10 @@
 #include "../Utility/Texture.h"	//! Handles Texture loading for bitmap images
 #include "../Utility/Camera.h"  //! Camera class
 #include <vector>		//! Utility for maintaining DispalyableObjects in system
+#include <irrKlang.h>
+#include <conio.h>
+using namespace irrklang;
+#pragma comment(lib, "irrKlang.lib") // link with irrKlang.dll
 
 class DisplayableObject; // Anonymous
 
@@ -38,6 +42,9 @@ public:
 	/** Returns a pointer to the Camera */
 	static Camera* GetCamera() {
 		return &camera;
+	}
+	static ISoundEngine* GetMusicEngine() {
+		return musicEngine;
 	}
 
 protected:
@@ -122,4 +129,6 @@ private:
 	* @see #AddObjectToScene(DisplayableObject)
 	*/
 	std::vector<DisplayableObject*> objects;
+
+	static ISoundEngine* musicEngine;
 };

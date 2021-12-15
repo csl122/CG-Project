@@ -1,10 +1,11 @@
 #include "Head.h"
+#include "Soldier.h"
 
 Head::Head(MyScene* scene, string fileName, Vertex* color, int winding) : WorldObject(scene, 0, "test", 0),
 scene(scene), _flagAutospin(false), ifWin(false), keyframe(-1), animateTime(0.0), animateRotation(0.0), interpA(0.0), interpB(0.0), interpTime(0.0),
 _flagReset(false), _iKey(false), _jKey(false), _kKey(false),
 _lKey(false), _oKey(false), _uKey(false), _plusKey(false), _minusKey(false),
-_upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
+_upKey(false), _downKey(false), _leftKey(false), _rightKey(false), _flagMove(false), _flagLose(false), _flagStart(false)
 {
 	_filename = fileName;
 	_obj_path = "./Obj/" + _filename + ".obj";
@@ -179,85 +180,108 @@ void Head::setOrientation(Vertex* orientation) {
 void Head::Update(const double& deltaTime) {
 	float velocity = 100.0f * static_cast<float>(deltaTime);
 	float shrinkRate = -5.0f * static_cast<float>(deltaTime);
+	ISoundEngine* musicEngine = Scene::GetMusicEngine();
 
-	
-	animateTime += static_cast<float>(deltaTime);
-	animateRotation += static_cast<float>(deltaTime);
-
-	// check if we hit the end of the animation (3 seconds), if so reset
-	if (animateTime >= 7.0f)
+	if (!ifWin && !_flagLose && _flagStart)
 	{
-		animateTime = 0.0f;
-		keyframe = -1;
-	}
 
-	// check if we are in the 1st second of animation
-	if (animateTime < 0.5f)
-	{
-		// check if we have only just entered the 1st keyframe in which case
-		// set up the parameters
-		if (keyframe != 0)
+
+		animateTime += static_cast<float>(deltaTime);
+		animateRotation += static_cast<float>(deltaTime);
+
+		// check if we hit the end of the animation (3 seconds), if so reset
+		if (animateTime >= 8.0f)
 		{
 			animateTime = 0.0f;
-			animateRotation = 0.0f;
-			keyframe = 0;
-			interpA = 0.0f;
-			interpB = 180.0f;
-			interpTime = 0.5f;
-		}
-	}
-	// check if we are in the 1.0 to 1.25 seconds of animation
-	else if (animateTime < 5.f)
-	{
-		// check if we have only just entered the 2nd keyframe in which case 
-		// set up the parameters
-		if (keyframe != 1)
-		{
-			keyframe = 1;
-			animateRotation = 0.0f;
-			interpA = 180.0f;
-			interpB = 180.0f;
-			interpTime = 4.f;
-		}
-	}
-	else if (animateTime < 5.5f)
-	{
-		// check if we have only just entered the 2nd keyframe in which case 
-		// set up the parameters
-		if (keyframe != 2)
-		{
-			keyframe = 2;
-			animateRotation = 0.0f;
-			interpA = 180.0f;
-			interpB = 0.0f;
-			interpTime = 0.5f;
-		}
-	}
-	else
-	{
-
-		if (keyframe != 3)
-		{
-			keyframe = 3;
-			animateRotation = 0.0f;
-			interpA = 0.0f;
-			interpB = 0.0f;
-			interpTime = 1.5f;
+			keyframe = -1;
 		}
 
+		// check if we are in the 1st second of animation
+		if (animateTime < 0.5f)
+		{
+			// check if we have only just entered the 1st keyframe in which case
+			// set up the parameters
+			if (keyframe != 0)
+			{
+				animateTime = 0.0f;
+				animateRotation = 0.0f;
+				keyframe = 0;
+				interpA = 0.0f;
+				interpB = 180.0f;
+				interpTime = 0.5f;
+			}
+		}
+		// check if we are in the 1.0 to 1.25 seconds of animation
+		else if (animateTime < 5.f)
+		{
+			// check if we have only just entered the 2nd keyframe in which case 
+			// set up the parameters
+			if (keyframe != 1)
+			{
+				keyframe = 1;
+				animateRotation = 0.0f;
+				interpA = 180.0f;
+				interpB = 180.0f;
+				interpTime = 4.f;
+			}
+			
+		}
+		else if (animateTime < 5.5f)
+		{
+			// check if we have only just entered the 2nd keyframe in which case 
+			// set up the parameters
+			if (keyframe != 2)
+			{
+				keyframe = 2;
+				animateRotation = 0.0f;
+				interpA = 180.0f;
+				interpB = 0.0f;
+				interpTime = 0.5f;
+			}
+		}
+		else
+		{
+
+			if (keyframe != 3)
+			{
+				keyframe = 3;
+				animateRotation = 0.0f;
+				interpA = 0.0f;
+				interpB = 0.0f;
+				interpTime = 2.5f;
+			}
+			if (_flagMove)
+			{
+				_flagLose = true;
+				Soldier::SetLose(true);
+				musicEngine->removeAllSoundSources();
+				musicEngine->play2D("./Media/bell.wav", false);
+				printf("los!!!!!!!");
+			}
+		}
 	}
-	
 	
 	
 	float x, y, z;
 	Camera* camera = Scene::GetCamera();
 	camera->GetEyePosition(x, y, z);
 
-	if (!ifWin && z < -700 && abs(y - (50)) < 10)
+	if (abs(x - 0) < 200 && abs(z - (-570)) < 10 && abs(y - (1350)) < 10)
+	{
+		//camera->Reset();
+		camera->SetCameraPosition(0.f, 50.f, 935.f); //(0.f ,50.f, 935.f)(0., 1350.0f, 500.)
+		
+		_flagStart = true;
+		
+		musicEngine->removeAllSoundSources();
+		musicEngine->play2D("./Media/wood.mp3", true);
+	}
+
+	if (!ifWin && z < -700 && abs(y - (50)) < 10 && !_flagLose)
 	{
 		ifWin = true;
-		
-
+		musicEngine->removeAllSoundSources();
+		//musicEngine->play2D("./Media/wood.wav", true);
 	}
 
 	// Spacebar will reset transformation values
@@ -267,7 +291,15 @@ void Head::Update(const double& deltaTime) {
 		size(vSize->x, vSize->y, vSize->z);
 		position(vPosition->x, vPosition->y, vPosition->z);
 		orientation(vOrientation->x, vOrientation->y, vOrientation->z);
+		_flagStart = false;
 		_flagReset = false;
+		_flagLose = false;
+		ifWin = false;
+		animateTime = 0.0f;
+		keyframe = -1;
+		musicEngine->removeAllSoundSources();
+		musicEngine->play2D("./Media/back1.wav", true);
+		Soldier::SetLose(false);
 	}
 
 	/*
@@ -414,6 +446,12 @@ void Head::HandleKey(unsigned char key, int state, int x, int y)
 		_flagReset = true;
 		break;
 	case 'f':
+		break;
+	case 'w':
+	case 'a':
+	case 's':
+	case 'd':
+		_flagMove = static_cast<GLboolean>(state);
 		break;
 		//if (state == 0) {
 			//_flagAutospin = !_flagAutospin;

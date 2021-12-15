@@ -9,7 +9,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 	_filename = fileName;
 	_obj_path = "./Obj/" + _filename + ".obj";
 	_tex_path = "./Textures/" + _filename + ".bmp";
-	//_tex_path2 = "Texture/" + fileName + "2.bmp";
 	defaultColor = color;
 
 	objectFileReader = new ObjectFileReader(_obj_path);
@@ -68,7 +67,7 @@ void ModelObject::Display() {
 	//glMaterialf(GL_FRONT, GL_SHININESS, _mat_shininess[0]);
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, _texID);
-	glColor3f(1, 1, 1);
+	glColor3f(defaultColor->x, defaultColor->y, defaultColor->y);
 	glutSolidSphere(1, 1, 1);
 	Render();
 
@@ -96,7 +95,7 @@ void ModelObject::Render() {
 		//auto textureChanged = faceMaterial != currentTexture;
 
 		Face* face = faces[faceId];
-		glColor3f(1.f, 1.f, 1.f);
+		//glColor3f(1.f, 1.f, 1.f);
 		if (face->faceData->size() == 3) {
 			glBegin(GL_TRIANGLES);
 		}
@@ -172,60 +171,15 @@ void ModelObject::setOrientation(Vertex* orientation) {
 	rotation[2] = vOrientation->z;
 }
 
-#include <mmsystem.h>
-#pragma comment(lib, "winmm.lib")
+
 void ModelObject::Update(const double& deltaTime) {
 	float velocity = 100.0f * static_cast<float>(deltaTime);
 	float shrinkRate = -5.0f * static_cast<float>(deltaTime);
-
-	/*if (abs(scene->rx) > 10) rotation[1] += scene->rx / 16.f;
-	if (abs(scene->ry) > 10) rotation[0] -= scene->ry / 16.f;
-
-	if (abs(scene->lx) > 10) pos[0] += scene->lx / 128.0f;
-	if (abs(scene->ly) > 10) pos[2] += scene->ly / 128.0f;
-
-	if (abs(scene->lt) > 10) {
-		scale[0] += shrinkRate * scene->lt / 128.0f;
-		scale[1] += shrinkRate * scene->lt / 128.0f;
-		scale[2] += shrinkRate * scene->lt / 128.0f;
-	}
-
-	if (abs(scene->rt) > 10) {
-		scale[0] -= shrinkRate * scene->rt / 128.0f;
-		scale[1] -= shrinkRate * scene->rt / 128.0f;
-		scale[2] -= shrinkRate * scene->rt / 128.0f;
-	}*/
-
-	float x, y, z;
-	Camera* camera = Scene::GetCamera();
-	camera->GetEyePosition(x, y, z);
-
-	if ( !ifWin && z < -700 && abs(y - (50)) < 10)
-	{
-		ifWin = true;
-		_filename = "gun";
-		_obj_path = "./Obj/" + _filename + ".obj";
-		_tex_path = "./Textures/" + _filename + ".bmp";
-		//_tex_path2 = "Texture/" + fileName + "2.bmp";
-		
-
-		objectFileReader = new ObjectFileReader(_obj_path);
-		objectFileReader->Load();
-
-		vertices = objectFileReader->vertices;
-		normals = objectFileReader->normals;
-		textureCoordinates = objectFileReader->textureCoordinates;
-		faces = objectFileReader->faces;
-		faceMaterials = objectFileReader->faceMaterials;
-
-		_texID = scene->GetTexture(_tex_path);
-		//camera->SetCameraPosition(0.f, 50.f, 935.f); //(0.f ,50.f, 935.f)(0., 1350.0f, 500.)
-	}
+	
 
 	// Spacebar will reset transformation values
 	if (_flagReset)
 	{
-		PlaySound(TEXT("naruto.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		size(vSize->x, vSize->y, vSize->z);
 		position(vPosition->x, vPosition->y, vPosition->z);
 		orientation(vOrientation->x, vOrientation->y, vOrientation->z);
@@ -240,94 +194,94 @@ void ModelObject::Update(const double& deltaTime) {
 	rotate around x,y,z axes for (i,k), (j,l) and (u,o) respectively
 	*/
 
-	if (_flagAutospin) {
-		rotation[0] -= velocity;
-		rotation[1] -= velocity;
-	}
+	//if (_flagAutospin) {
+	//	rotation[0] -= velocity;
+	//	rotation[1] -= velocity;
+	//}
 
-	// 'i' pressed down, decrease rotation around 'x'
-	if (_iKey) rotation[0] -= velocity;
-	// 'j' pressed down, decrease rotation around 'y'
-	if (_jKey) rotation[1] -= velocity;
-	// 'k' pressed down, increase rotation around 'x'
-	if (_kKey) rotation[0] += velocity;
-	// 'l' pressed down, increase rotation around 'y'
-	if (_lKey) rotation[1] += velocity;
-	// 'o' pressed down, decrease rotation around 'z'
-	if (_oKey) rotation[2] -= velocity;
-	// 'u' pressed down, increase rotation around 'x'
-	if (_uKey) rotation[2] += velocity;
+	//// 'i' pressed down, decrease rotation around 'x'
+	//if (_iKey) rotation[0] -= velocity;
+	//// 'j' pressed down, decrease rotation around 'y'
+	//if (_jKey) rotation[1] -= velocity;
+	//// 'k' pressed down, increase rotation around 'x'
+	//if (_kKey) rotation[0] += velocity;
+	//// 'l' pressed down, increase rotation around 'y'
+	//if (_lKey) rotation[1] += velocity;
+	//// 'o' pressed down, decrease rotation around 'z'
+	//if (_oKey) rotation[2] -= velocity;
+	//// 'u' pressed down, increase rotation around 'x'
+	//if (_uKey) rotation[2] += velocity;
 
-	/*
-	If keys pressed down:
-	[-]
-	|+|  or   [-]^[+]
-	|_|
-	scale by all x,y,z axes equally, + to grow, - to shrink
-	*/
-	// '-' pressed down (and no scale value is below 1.0)
-	if (_minusKey && scale[0] > 1.0f && scale[1] > 1.0f && scale[2] > 1.0f)
-	{
-		// increase shrinkage by constant (negative) rate
-		scale[0] += shrinkRate;
-		scale[1] += shrinkRate;
-		scale[2] += shrinkRate;
-	}
-	// '+' pressed down
-	if (_plusKey)
-	{
-		// decrease shrinkage (e.g. grow)
-		scale[0] -= shrinkRate;
-		scale[1] -= shrinkRate;
-		scale[2] -= shrinkRate;
-	}
+	///*
+	//If keys pressed down:
+	//[-]
+	//|+|  or   [-]^[+]
+	//|_|
+	//scale by all x,y,z axes equally, + to grow, - to shrink
+	//*/
+	//// '-' pressed down (and no scale value is below 1.0)
+	//if (_minusKey && scale[0] > 1.0f && scale[1] > 1.0f && scale[2] > 1.0f)
+	//{
+	//	// increase shrinkage by constant (negative) rate
+	//	scale[0] += shrinkRate;
+	//	scale[1] += shrinkRate;
+	//	scale[2] += shrinkRate;
+	//}
+	//// '+' pressed down
+	//if (_plusKey)
+	//{
+	//	// decrease shrinkage (e.g. grow)
+	//	scale[0] -= shrinkRate;
+	//	scale[1] -= shrinkRate;
+	//	scale[2] -= shrinkRate;
+	//}
 
-	/*
-	If keys pressed down:
-	[/\]
-	[<-][\/][->]
-	translate along x and y axes, for (left, right) and (up, down) respectively
-	*/
+	///*
+	//If keys pressed down:
+	//[/\]
+	//[<-][\/][->]
+	//translate along x and y axes, for (left, right) and (up, down) respectively
+	//*/
 
-	/*
-	faceY
-		up = 0;
-		down = 1;
-	faceX
-		left = 0;
-		right = 1;
-	*/
-	float current = rotation[1];
+	///*
+	//faceY
+	//	up = 0;
+	//	down = 1;
+	//faceX
+	//	left = 0;
+	//	right = 1;
+	//*/
+	//float current = rotation[1];
 
-	if (_upKey) {
-		pos[2] -= velocity;
+	//if (_upKey) {
+	//	pos[2] -= velocity;
 
-		if (rotation[1] > -180.0) rotation[1] -= 30;
-		if (rotation[1] < -180.0) rotation[1] += 30;
-	}
-	if (_downKey) {
-		pos[2] += velocity;
-		if (rotation[1] > 0) rotation[1] -= 30;
-		if (rotation[1] < 0) rotation[1] += 30;
-	}
+	//	if (rotation[1] > -180.0) rotation[1] -= 30;
+	//	if (rotation[1] < -180.0) rotation[1] += 30;
+	//}
+	//if (_downKey) {
+	//	pos[2] += velocity;
+	//	if (rotation[1] > 0) rotation[1] -= 30;
+	//	if (rotation[1] < 0) rotation[1] += 30;
+	//}
 
-	if (_leftKey) {
-		pos[0] -= velocity;
-		if (rotation[1] > -90) rotation[1] -= 30;
-		if (rotation[1] < -90) rotation[1] += 30;
-	}
-	if (_rightKey) {
-		pos[0] += velocity;
-		if (rotation[1] > 90) rotation[1] -= 30;
-		if (rotation[1] < 90) rotation[1] += 30;
-	}
+	//if (_leftKey) {
+	//	pos[0] -= velocity;
+	//	if (rotation[1] > -90) rotation[1] -= 30;
+	//	if (rotation[1] < -90) rotation[1] += 30;
+	//}
+	//if (_rightKey) {
+	//	pos[0] += velocity;
+	//	if (rotation[1] > 90) rotation[1] -= 30;
+	//	if (rotation[1] < 90) rotation[1] += 30;
+	//}
 
-	if (_pageDn) {
-		pos[1] -= velocity;
-	}
-	if (_pageUp) {
-		pos[1] += velocity;
-	}
+	//if (_pageDn) {
+	//	pos[1] -= velocity;
+	//}
+	//if (_pageUp) {
+	//	pos[1] += velocity;
+	//}
 }
 
 
@@ -345,43 +299,43 @@ void ModelObject::HandleKey(unsigned char key, int state, int x, int y)
 	// Switch on key char
 	// Set flag for control keys, (i,j,k,l,o,u,+,-,space) to state value
 	// i.e. if 'i' is pressed, _iKey = true, if 'i' released, _iKey = false
-	switch (key)
-	{
-	case 'i':
-		_iKey = static_cast<GLboolean>(state);
-		break;
-	case 'j':
-		_jKey = static_cast<GLboolean>(state);
-		break;
-	case 'k':
-		_kKey = static_cast<GLboolean>(state);
-		break;
-	case 'l':
-		_lKey = static_cast<GLboolean>(state);
-		break;
-	case 'o':
-		_oKey = static_cast<GLboolean>(state);
-		break;
-	case 'u':
-		_uKey = static_cast<GLboolean>(state);
-		break;
-	case '+': // with shift
-	case '=': // without shift
-		_plusKey = static_cast<GLboolean>(state);
-		break;
-	case '-':
-		_minusKey = static_cast<GLboolean>(state);
-		break;
-	case 'b':
-		_flagReset = true;
-		break;
-	case 'f':
-		break;
-		//if (state == 0) {
-			//_flagAutospin = !_flagAutospin;
-			//break;
-		//}
-	}
+	//switch (key)
+	//{
+	//case 'i':
+	//	_iKey = static_cast<GLboolean>(state);
+	//	break;
+	//case 'j':
+	//	_jKey = static_cast<GLboolean>(state);
+	//	break;
+	//case 'k':
+	//	_kKey = static_cast<GLboolean>(state);
+	//	break;
+	//case 'l':
+	//	_lKey = static_cast<GLboolean>(state);
+	//	break;
+	//case 'o':
+	//	_oKey = static_cast<GLboolean>(state);
+	//	break;
+	//case 'u':
+	//	_uKey = static_cast<GLboolean>(state);
+	//	break;
+	//case '+': // with shift
+	//case '=': // without shift
+	//	_plusKey = static_cast<GLboolean>(state);
+	//	break;
+	//case '-':
+	//	_minusKey = static_cast<GLboolean>(state);
+	//	break;
+	//case 'b':
+	//	_flagReset = true;
+	//	break;
+	//case 'f':
+	//	break;
+	//	//if (state == 0) {
+	//		//_flagAutospin = !_flagAutospin;
+	//		//break;
+	//	//}
+	//}
 }
 
 void ModelObject::HandleSpecialKey(int key, int state, int x, int y)
@@ -400,7 +354,7 @@ void ModelObject::HandleSpecialKey(int key, int state, int x, int y)
 	// Switch on key code (using GLUT #defines)
 	// Set flag for control keys, (up, down, left, right) to state value
 	// i.e. if 'up' is pressed, _upKey = true, if 'up' released, _upKey = false
-	switch (key)
+	/*switch (key)
 	{
 	case GLUT_KEY_UP:
 		_upKey = static_cast<GLboolean>(state);
@@ -420,5 +374,5 @@ void ModelObject::HandleSpecialKey(int key, int state, int x, int y)
 	case GLUT_KEY_PAGE_DOWN:
 		_pageDn = static_cast<GLboolean>(state);
 		break;
-	}
+	}*/
 }

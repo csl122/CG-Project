@@ -20,28 +20,35 @@ void Triangle::Display()
 	// scale the traingle
 	glScalef(0.75f, 0.75f, 0.75f);
 
+	glTranslatef(0.0f, -150.0f, 00.0f);
+
 	// disable culling (removal) of backface triangles so that when we look at
 	// triangle to does not disappearthe back of the
 	glDisable(GL_CULL_FACE);
 
 	// draw the triangle us GL_TRIANGLES as the primative so that every 3
 	// joined into one triangle verticies we pass get
-	glBegin(GL_TRIANGLES);
+	glBegin(GL_QUADS);
 
 	// set the colour of the first vertex (8-bit RGB)
-	glColor3ub(11, 191, 218); // [3ub] unsigned byte x 3 = 0-255
+	glColor3ub(3, 70, 174); // [3ub] unsigned byte x 3 = 0-255
 	// set the position of the first vertex
 	glVertex3f(-400.0f, -400.0f, 0.0);
 
 	// set the colour of the second vertex (normalised RGB)
-	glColor3ub(30.f, 80.0f, 152.0f); // [3f] float x 3 = 0.0f-1.0f
+	glColor3ub(10.f, 207.0f, 226.0f); // [3f] float x 3 = 0.0f-1.0f
 	// set the position of the second vertex
 	glVertex3f(400.0f, -400.0f, 0.0f);
 
 	// set the colour of the third vertex (normalised RGBA)
-	glColor3ub(85.0f, 12.0f, 153.0f); // [4f] float x 4 = 0.0f-1.0f
+	glColor3ub(166.0f, 170.0f, 253.0f); // [4f] float x 4 = 0.0f-1.0f
 	// set the position of the third vertex
-	glVertex3f(0.0f, 400.0f * float(sqrt(2)), 0.0f);
+	glVertex3f(400.0f, 400.0f, 0.0f);
+
+	// set the colour of the third vertex (normalised RGBA)
+	glColor3ub(90.0f, 9.0f, 156.0f); // [4f] float x 4 = 0.0f-1.0f
+	// set the position of the third vertex
+	glVertex3f(-400.0f, 400.0f, 0.0f);
 
 	// stop drawing triangles
 	glEnd();
@@ -58,17 +65,17 @@ void Triangle::Display()
 /// update the Z rotation variable with change in time
 void Triangle::Update(const double& deltaTime)
 {
-	zrot += 10.0f * static_cast<float>(deltaTime);
+	zrot += 30.0f * static_cast<float>(deltaTime);
 
-	float x, y, z;
-	Camera* camera = Scene::GetCamera();
-	camera->GetEyePosition(x, y, z);
-	
-	if (abs(x - 0) < 200 && abs(z - (-570)) < 10 && abs(y - (1350)) < 10)
-	{
-		//camera->Reset();
-		camera->SetCameraPosition(0.f, 50.f, 935.f); //(0.f ,50.f, 935.f)(0., 1350.0f, 500.)
-	}
+	//float x, y, z;
+	//Camera* camera = Scene::GetCamera();
+	//camera->GetEyePosition(x, y, z);
+	//
+	//if (abs(x - 0) < 200 && abs(z - (-570)) < 10 && abs(y - (1350)) < 10)
+	//{
+	//	//camera->Reset();
+	//	camera->SetCameraPosition(0.f, 50.f, 935.f); //(0.f ,50.f, 935.f)(0., 1350.0f, 500.)
+	//}
 }
 
 /// set scale variables based on a key press

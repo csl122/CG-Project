@@ -106,6 +106,13 @@ AddObjectToScene(dr);
 	head->setOrientation(new Vertex(0, 0, 0));
 	AddObjectToScene(head);
 
+	Vertex* triangleP = new Vertex(300, 70, -1100);
+	ModelObject* triangle = new ModelObject(this, "triangle", new Vertex(.9677f, .1176f, .1176f), GL_CCW);
+	triangle->setScale(objScale);
+	triangle->setPosition(triangleP);
+	triangle->setOrientation(new Vertex(0, 180, 0));
+	AddObjectToScene(triangle);
+
 }
 
 /// set the perspective of camera

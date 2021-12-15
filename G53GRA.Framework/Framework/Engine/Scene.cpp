@@ -4,8 +4,10 @@
 #include "../Interface/DisplayableObject.h"
 #include <cstdlib>
 
+
 Texture Scene::texture = Texture();		// Initialise Texture handler
 Camera Scene::camera = Camera();        // Initialise Camera object
+ISoundEngine* Scene::musicEngine = createIrrKlangDevice();
 
 Scene::Scene(int argc, char** argv, const char *title, const int& windowWidth, const int& windowHeight)
 	: Engine(argc, argv, title, windowWidth, windowHeight)

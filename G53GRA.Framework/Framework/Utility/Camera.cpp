@@ -10,8 +10,8 @@ Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), uKey(0), bKey(0), lKey(0)
 void Camera::Reset(){
 	// set the camera position to start at (0,0,0)
 	eyePosition[0] = 0.0f;
-	eyePosition[1] = 50.0f; //1350
-	eyePosition[2] = 935.f;//0.8f * static_cast<float>(Scene::GetWindowHeight()) / static_cast<float>(tan(M_PI / 6.0));//0.0f;
+	eyePosition[1] = 1350.0f; //1350 50
+	eyePosition[2] = 300.f;//0.8f * static_cast<float>(Scene::GetWindowHeight()) / static_cast<float>(tan(M_PI / 6.0));//0.0f;
 
 	// set the view direction vector of the camera to be (0,0,-1)
 	vd[0] = 0.0f;
@@ -145,43 +145,43 @@ void Camera::Update(const double& deltaTime)
 
 	sensitivity = 0.1f;
 
-	if (lKey) {
-		sub(vd, right, sensitivity);
-		// normalise the view direction so it is length 1
-		norm(vd);
+	//if (lKey) {
+	//	sub(vd, right, sensitivity);
+	//	// normalise the view direction so it is length 1
+	//	norm(vd);
 
-		// use the view direction crossed with the up vector to obtain the corrected right vector
-		cross(vd, up, right);
+	//	// use the view direction crossed with the up vector to obtain the corrected right vector
+	//	cross(vd, up, right);
 
-		// normalise the right vector
-		norm(right);
+	//	// normalise the right vector
+	//	norm(right);
 
-		/* As we want out camera to stay on the same plane at the same height (i.e. not move up and down the y axis) update a forward direction vector which can be used to move the camera. This forward vector moves the camera in the same direction as the view direction except it will not contain any y component so it cannot move off of its original height. This was we are free to look up and down however moving forward and back will not move us off of the camera plane. */
+	//	/* As we want out camera to stay on the same plane at the same height (i.e. not move up and down the y axis) update a forward direction vector which can be used to move the camera. This forward vector moves the camera in the same direction as the view direction except it will not contain any y component so it cannot move off of its original height. This was we are free to look up and down however moving forward and back will not move us off of the camera plane. */
 
-		forward[0] = vd[0];
-		forward[2] = vd[2];
-		norm(forward);
-	}
-		
-		
+	//	forward[0] = vd[0];
+	//	forward[2] = vd[2];
+	//	norm(forward);
+	//}
+	//	
+	//	
 
-	if (rKey) {
-		add(vd, right, sensitivity);
-		// normalise the view direction so it is length 1
-		norm(vd);
+	//if (rKey) {
+	//	add(vd, right, sensitivity);
+	//	// normalise the view direction so it is length 1
+	//	norm(vd);
 
-		// use the view direction crossed with the up vector to obtain the corrected right vector
-		cross(vd, up, right);
+	//	// use the view direction crossed with the up vector to obtain the corrected right vector
+	//	cross(vd, up, right);
 
-		// normalise the right vector
-		norm(right);
+	//	// normalise the right vector
+	//	norm(right);
 
-		/* As we want out camera to stay on the same plane at the same height (i.e. not move up and down the y axis) update a forward direction vector which can be used to move the camera. This forward vector moves the camera in the same direction as the view direction except it will not contain any y component so it cannot move off of its original height. This was we are free to look up and down however moving forward and back will not move us off of the camera plane. */
+	//	/* As we want out camera to stay on the same plane at the same height (i.e. not move up and down the y axis) update a forward direction vector which can be used to move the camera. This forward vector moves the camera in the same direction as the view direction except it will not contain any y component so it cannot move off of its original height. This was we are free to look up and down however moving forward and back will not move us off of the camera plane. */
 
-		forward[0] = vd[0];
-		forward[2] = vd[2];
-		norm(forward);
-	}
+	//	forward[0] = vd[0];
+	//	forward[2] = vd[2];
+	//	norm(forward);
+	//}
 		
 	
 	SetupCamera();
@@ -272,7 +272,7 @@ void Camera::HandleSpecialKey(int key, int state, int x, int y)
 		bKey = 0;
 		//control = 0;
 
-	switch (key)
+	/*switch (key)
 	{
 	case GLUT_KEY_UP:
 		uKey = state;
@@ -289,7 +289,7 @@ void Camera::HandleSpecialKey(int key, int state, int x, int y)
 
 	default:
 		break;
-	}
+	}*/
 }
 
 void Camera::HandleMouse(int button, int state, int x, int y)
@@ -299,7 +299,7 @@ void Camera::HandleMouse(int button, int state, int x, int y)
 	mouseY = y;
 }
 
-void Camera::HandleMouseMove(int x, int y)
+void Camera::HandleMouseDrag(int x, int y)
 {
 
 	float rx, ry;
@@ -311,9 +311,9 @@ void Camera::HandleMouseMove(int x, int y)
 	ry = static_cast<float>(y - mouseY);
 
 	// switch on which button was pressed and only do the update if the left button was pressed
-	/*switch (currentButton)
+	switch (currentButton)
 	{
-		case GLUT_RIGHT_BUTTON:*/
+		case GLUT_RIGHT_BUTTON:
 
 			// add on the amount of change in to the left and right view direction of the camera
 			if (rx > 0)
@@ -340,14 +340,14 @@ void Camera::HandleMouseMove(int x, int y)
 			forward[0] = vd[0];
 			forward[2] = vd[2];
 			norm(forward);
-		/*	break;
+			break;
 		case GLUT_LEFT_BUTTON:
 			break;
 		case GLUT_MIDDLE_BUTTON:
 			break;
 		default:
 			break;
-	}*/
+	}
 
 	mouseX = x;
 	mouseY = y;
