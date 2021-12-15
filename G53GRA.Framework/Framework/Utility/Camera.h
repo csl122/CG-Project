@@ -115,6 +115,8 @@ private:
 	/** Current rendering window dimensions */
 	int windowWidth, windowHeight;
 
+	int musicflat = 1;
+
 	/** Variable to remember mouse click */
 	int currentButton;
 	/** Previous mouse coordinates */
