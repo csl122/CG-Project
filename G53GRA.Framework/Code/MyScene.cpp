@@ -13,6 +13,7 @@
 #include "Soldier.h"
 #include "Doll.h"
 #include "Head.h"
+#include "SoldierShooting.h"
 
 MyScene::MyScene(int argc, char** argv, const char *title, const int& windowWidth, const int& windowHeight)
 	: Scene(argc, argv, title, windowWidth, windowHeight){}
@@ -112,6 +113,14 @@ AddObjectToScene(dr);
 	triangle->setPosition(triangleP);
 	triangle->setOrientation(new Vertex(0, 180, 0));
 	AddObjectToScene(triangle);
+
+	Vertex* SoldierShootingP = new Vertex(0, -100, -900);
+	SoldierShooting* soldierShooting = new SoldierShooting(this, new Vertex(.9677f, .1176f, .1176f), GL_CCW);
+	soldierShooting->setScale(objScale);
+	soldierShooting->setPosition(SoldierShootingP);
+	soldierShooting->setOrientation(new Vertex(0, 0, 0));
+	AddObjectToScene(soldierShooting);
+
 
 }
 

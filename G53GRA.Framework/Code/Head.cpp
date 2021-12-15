@@ -492,21 +492,27 @@ void Head::HandleKey(unsigned char key, int state, int x, int y)
 	switch (key)
 	{
 	case 'i':
+	case 'I':
 		_iKey = static_cast<GLboolean>(state);
 		break;
 	case 'j':
+	case 'J':
 		_jKey = static_cast<GLboolean>(state);
 		break;
 	case 'k':
+	case 'K':
 		_kKey = static_cast<GLboolean>(state);
 		break;
 	case 'l':
+	case 'L':
 		_lKey = static_cast<GLboolean>(state);
 		break;
 	case 'o':
+	case 'O':
 		_oKey = static_cast<GLboolean>(state);
 		break;
 	case 'u':
+	case 'U':
 		_uKey = static_cast<GLboolean>(state);
 		break;
 	case '+': // with shift
@@ -517,6 +523,7 @@ void Head::HandleKey(unsigned char key, int state, int x, int y)
 		_minusKey = static_cast<GLboolean>(state);
 		break;
 	case 'b':
+	case 'B':
 		_flagReset = true;
 		break;
 	case 'f':
@@ -525,6 +532,10 @@ void Head::HandleKey(unsigned char key, int state, int x, int y)
 	case 'a':
 	case 's':
 	case 'd':
+	case 'W':
+	case 'A':
+	case 'S':
+	case 'D':
 		_flagMove = static_cast<GLboolean>(state);
 		break;
 		//if (state == 0) {
