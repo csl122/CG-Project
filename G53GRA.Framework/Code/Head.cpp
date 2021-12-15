@@ -209,6 +209,8 @@ void Head::Update(const double& deltaTime) {
 				interpA = 0.0f;
 				interpB = 180.0f;
 				interpTime = 0.5f;
+				_tex_path = "./Textures/head.bmp";
+				_texID = scene->GetTexture(_tex_path);
 			}
 		}
 		// check if we are in the 1.0 to 1.25 seconds of animation
@@ -249,6 +251,8 @@ void Head::Update(const double& deltaTime) {
 				interpA = 0.0f;
 				interpB = 0.0f;
 				interpTime = 2.5f;
+				_tex_path = "./Textures/headred.bmp";
+				_texID = scene->GetTexture(_tex_path);
 			}
 			if (_flagMove)
 			{
@@ -277,7 +281,7 @@ void Head::Update(const double& deltaTime) {
 		musicEngine->play2D("./Media/wood.mp3", true);
 	}
 
-	if (!ifWin && z < -700 && abs(y - (50)) < 10 && !_flagLose)
+	if (!ifWin && z < -700 && abs(y - (50)) < 20 && !_flagLose)
 	{
 		ifWin = true;
 		musicEngine->removeAllSoundSources();

@@ -189,7 +189,7 @@ void Soldier::Update(const double& deltaTime) {
 	Camera* camera = Scene::GetCamera();
 	camera->GetEyePosition(x, y, z);
 
-	if (!ifWin && z < -700 && abs(y - (50)) < 10 && !_flagLose)
+	if (!ifWin && z < -700 && abs(y - (50)) < 20 && !_flagLose)
 	{
 		ifWin = true;
 		_obj_path = "./Obj/" + _filename2 + ".obj";
@@ -245,23 +245,23 @@ void Soldier::Update(const double& deltaTime) {
 	rotate around x,y,z axes for (i,k), (j,l) and (u,o) respectively
 	*/
 
-	if (_flagAutospin) {
+	/*if (_flagAutospin) {
 		rotation[0] -= velocity;
 		rotation[1] -= velocity;
-	}
+	}*/
 
 	// 'i' pressed down, decrease rotation around 'x'
-	if (_iKey) rotation[0] -= velocity;
-	// 'j' pressed down, decrease rotation around 'y'
-	if (_jKey) rotation[1] -= velocity;
-	// 'k' pressed down, increase rotation around 'x'
-	if (_kKey) rotation[0] += velocity;
-	// 'l' pressed down, increase rotation around 'y'
-	if (_lKey) rotation[1] += velocity;
-	// 'o' pressed down, decrease rotation around 'z'
-	if (_oKey) rotation[2] -= velocity;
-	// 'u' pressed down, increase rotation around 'x'
-	if (_uKey) rotation[2] += velocity;
+	//if (_iKey) rotation[0] -= velocity;
+	//// 'j' pressed down, decrease rotation around 'y'
+	//if (_jKey) rotation[1] -= velocity;
+	//// 'k' pressed down, increase rotation around 'x'
+	//if (_kKey) rotation[0] += velocity;
+	//// 'l' pressed down, increase rotation around 'y'
+	//if (_lKey) rotation[1] += velocity;
+	//// 'o' pressed down, decrease rotation around 'z'
+	//if (_oKey) rotation[2] -= velocity;
+	//// 'u' pressed down, increase rotation around 'x'
+	//if (_uKey) rotation[2] += velocity;
 
 	/*
 	If keys pressed down:
@@ -271,21 +271,21 @@ void Soldier::Update(const double& deltaTime) {
 	scale by all x,y,z axes equally, + to grow, - to shrink
 	*/
 	// '-' pressed down (and no scale value is below 1.0)
-	if (_minusKey && scale[0] > 1.0f && scale[1] > 1.0f && scale[2] > 1.0f)
-	{
-		// increase shrinkage by constant (negative) rate
-		scale[0] += shrinkRate;
-		scale[1] += shrinkRate;
-		scale[2] += shrinkRate;
-	}
-	// '+' pressed down
-	if (_plusKey)
-	{
-		// decrease shrinkage (e.g. grow)
-		scale[0] -= shrinkRate;
-		scale[1] -= shrinkRate;
-		scale[2] -= shrinkRate;
-	}
+	//if (_minusKey && scale[0] > 1.0f && scale[1] > 1.0f && scale[2] > 1.0f)
+	//{
+	//	// increase shrinkage by constant (negative) rate
+	//	scale[0] += shrinkRate;
+	//	scale[1] += shrinkRate;
+	//	scale[2] += shrinkRate;
+	//}
+	//// '+' pressed down
+	//if (_plusKey)
+	//{
+	//	// decrease shrinkage (e.g. grow)
+	//	scale[0] -= shrinkRate;
+	//	scale[1] -= shrinkRate;
+	//	scale[2] -= shrinkRate;
+	//}
 
 	/*
 	If keys pressed down:
