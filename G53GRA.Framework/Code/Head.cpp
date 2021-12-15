@@ -351,7 +351,7 @@ void Head::Update(const double& deltaTime) {
 	{
 		ifWin = true;
 		musicEngine->removeAllSoundSources();
-		//musicEngine->play2D("./Media/wood.wav", true);
+		musicEngine->play2D("./Media/victory.mp3", false);
 	}
 
 	// Spacebar will reset transformation values
