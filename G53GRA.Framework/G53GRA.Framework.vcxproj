@@ -83,6 +83,7 @@
   <ItemGroup>
     <Media Include="Media\back1.wav" />
     <Media Include="Media\bell.wav" />
+    <Media Include="Media\run.mp3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Obj\pink soldier.mtl" />

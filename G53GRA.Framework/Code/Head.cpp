@@ -343,7 +343,7 @@ void Head::Update(const double& deltaTime) {
 		
 		_flagStart = true;
 		glEnable(GL_LIGHT0);
-		musicEngine->removeAllSoundSources();
+		musicEngine->removeSoundSource("./Media/back1.wav");
 		musicEngine->play2D("./Media/wood.mp3", true);
 	}
 

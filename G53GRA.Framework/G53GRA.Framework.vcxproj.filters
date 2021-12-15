@@ -231,6 +231,7 @@
     <Media Include="Media\bell.wav">
       <Filter>Resource Files</Filter>
     </Media>
+    <Media Include="Media\run.mp3" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Obj\pink soldier.mtl" />

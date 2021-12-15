@@ -2,7 +2,7 @@
 #include "VectorMath.h"
 #include "Scene.h"
 
-ISoundEngine* musicEngine = Scene::GetMusicEngine();
+
 
 Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), uKey(0), bKey(0), lKey(0), rKey(0), speed(8.f), sensitivity(1.f), control(0), currentButton(0), mouseX(0), mouseY(0)
 {
@@ -82,13 +82,15 @@ void Camera::SetupCamera()
 void Camera::Update(const double& deltaTime)
 {
 	sensitivity = 0.0016f;
-
-	if ((aKey || dKey || wKey || sKey) && musicflat) {
-		musicEngine->play2D("./Media/run.mp3", true);
+	ISoundEngine* musicEngine = Scene::GetMusicEngine();
+	if ((aKey || dKey || wKey || sKey) && musicflat && !uKey && !bKey && (abs(eyePosition[1] - (50)) < 20 || abs(eyePosition[1] - (1350)) < 20)) {
+		irrklang::ISound* runSound = musicEngine->play2D("./Media/run.mp3", true);
+		if(runSound)
+			runSound->setVolume(0.02f);
 		musicflat = 0;
 	}
 
-	if (!aKey && !dKey && !wKey && !sKey && !musicflat) {
+	if (!aKey && !dKey && !wKey && !sKey && !musicflat || uKey || bKey) {
 		musicEngine->removeSoundSource("./Media/run.mp3");
 		musicflat = 1;
 	}
