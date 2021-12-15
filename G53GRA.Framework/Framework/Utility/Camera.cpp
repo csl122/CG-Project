@@ -2,6 +2,8 @@
 #include "VectorMath.h"
 #include "Scene.h"
 
+ISoundEngine* musicEngine = Scene::GetMusicEngine();
+
 Camera::Camera() : wKey(0), sKey(0), aKey(0), dKey(0), uKey(0), bKey(0), lKey(0), rKey(0), speed(8.f), sensitivity(1.f), control(0), currentButton(0), mouseX(0), mouseY(0)
 {
 	Reset();
@@ -81,16 +83,28 @@ void Camera::Update(const double& deltaTime)
 {
 	sensitivity = 0.0016f;
 
+	if ((aKey || dKey || wKey || sKey) && musicflat) {
+		musicEngine->play2D("./Media/run.mp3", true);
+		musicflat = 0;
+	}
+
+	if (!aKey && !dKey && !wKey && !sKey && !musicflat) {
+		musicEngine->removeSoundSource("./Media/run.mp3");
+		musicflat = 1;
+	}
+
 	if (eyePosition[0] <= 1000.0f && eyePosition[0] >= -1000.0f && eyePosition[2] <= 1000.0f && eyePosition[2] >= -1000.0f) {
 
 		if (aKey)
 			sub(eyePosition, right, speed);
+			
 
 		if (dKey)
-			add(eyePosition, right, speed);
+			add(eyePosition, right, speed);			
 
-		if (wKey)
+		if (wKey) 
 			add(eyePosition, forward, speed);
+			
 
 		if (sKey)
 			sub(eyePosition, forward, speed);
