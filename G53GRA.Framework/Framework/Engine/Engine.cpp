@@ -74,7 +74,7 @@ void Engine::InitFunc()
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
 
 	// set the ambient light model
-	GLfloat global_ambient[] = {0.1f, 0.1f, 0.1f, 1.0f};
+	GLfloat global_ambient[] = {0.05f, 0.05f, 0.05f, 1.0f};
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
 
 	// enable directional light lighting
@@ -82,14 +82,17 @@ void Engine::InitFunc()
 	// (x, y, z, 1.0) -> positional lighting
 	glEnable(GL_LIGHTING);
 	GLfloat ambience[] = {0.2f, 0.2f, 0.2f, 1.0f};
-	GLfloat diffuse[] = {0.8f, 0.8f, 0.8f, 1.0f};
+	GLfloat diffuse[] = {0.5f, 0.5f, 0.5f, 1.0f};
 	GLfloat specular[] = {1.0f, 1.0f, 1.0f, 1.0f};
 	GLfloat position[] = {0.0f, 1.0f, 0.2f, 0.0f};
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambience);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
 	glLightfv(GL_LIGHT0, GL_POSITION, position);
-	glEnable(GL_LIGHT0);
+	//glEnable(GL_LIGHT0);
+	glDisable(GL_LIGHT0);
+
+	
 
 	// Enable smooth shading from lighting
 	glShadeModel(GL_SMOOTH);

@@ -175,12 +175,16 @@ void Head::setOrientation(Vertex* orientation) {
 	rotation[2] = vOrientation->z;
 }
 
-#include <mmsystem.h>
-#pragma comment(lib, "winmm.lib")
+
 void Head::Update(const double& deltaTime) {
 	float velocity = 100.0f * static_cast<float>(deltaTime);
 	float shrinkRate = -5.0f * static_cast<float>(deltaTime);
 	ISoundEngine* musicEngine = Scene::GetMusicEngine();
+	float x, y, z;
+	Camera* camera = Scene::GetCamera();
+	camera->GetEyePosition(x, y, z);
+
+	
 
 	if (!ifWin && !_flagLose && _flagStart)
 	{
@@ -199,6 +203,7 @@ void Head::Update(const double& deltaTime) {
 		// check if we are in the 1st second of animation
 		if (animateTime < 0.5f)
 		{
+			
 			// check if we have only just entered the 1st keyframe in which case
 			// set up the parameters
 			if (keyframe != 0)
@@ -211,6 +216,8 @@ void Head::Update(const double& deltaTime) {
 				interpTime = 0.5f;
 				_tex_path = "./Textures/head.bmp";
 				_texID = scene->GetTexture(_tex_path);
+				glEnable(GL_LIGHT0);
+				glDisable(GL_LIGHT3);
 			}
 		}
 		// check if we are in the 1.0 to 1.25 seconds of animation
@@ -228,7 +235,7 @@ void Head::Update(const double& deltaTime) {
 			}
 			
 		}
-		else if (animateTime < 5.5f)
+		else if (animateTime < 5.7f)
 		{
 			// check if we have only just entered the 2nd keyframe in which case 
 			// set up the parameters
@@ -238,23 +245,27 @@ void Head::Update(const double& deltaTime) {
 				animateRotation = 0.0f;
 				interpA = 180.0f;
 				interpB = 0.0f;
-				interpTime = 0.5f;
+				interpTime = 0.7f;
 			}
 		}
 		else
 		{
-
+			
 			if (keyframe != 3)
 			{
 				keyframe = 3;
 				animateRotation = 0.0f;
 				interpA = 0.0f;
 				interpB = 0.0f;
-				interpTime = 2.5f;
+				interpTime = 2.3f;
 				_tex_path = "./Textures/headred.bmp";
 				_texID = scene->GetTexture(_tex_path);
+				
+				glDisable(GL_LIGHT0);
+				glEnable(GL_LIGHT3);
+				
 			}
-			if (_flagMove)
+			if (_flagMove && abs(y - (50)) < 20)
 			{
 				_flagLose = true;
 				Soldier::SetLose(true);
@@ -262,13 +273,68 @@ void Head::Update(const double& deltaTime) {
 				musicEngine->play2D("./Media/lose.mp3", false);
 				printf("los!!!!!!!");
 			}
+			GLfloat spot3_direction[] = { 0.0,-1 - -1.0 *(animateRotation/interpTime),1.0 };
+			glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, spot3_direction);
 		}
 	}
 	
+
+	if (_flagLose)
+	{
+		float scale = 1.f;
+		glDisable(GL_LIGHT3);
+		glDisable(GL_LIGHT0); 
+		
+		animateRotation += static_cast<float>(deltaTime);
+		if (animateRotation < 3)
+		{
+			scale = 1- scale * (animateRotation / 3);
+			GLfloat ambience4[] = { 0.2f* scale, 0.2f * scale, 0.2f * scale, 1.0f };
+			GLfloat diffuse4[] = { 0.5f * scale, 0.5f * scale, 0.5f * scale, 1.0f };
+			GLfloat specular4[] = { 1.0f * scale, 1.0f * scale, 1.0f * scale, 1.0f };
+			GLfloat position4[] = { 0.0f, 1.0f, 0.2f, 0.0f };
+			glLightfv(GL_LIGHT4, GL_AMBIENT, ambience4);
+			glLightfv(GL_LIGHT4, GL_DIFFUSE, diffuse4);
+			glLightfv(GL_LIGHT4, GL_SPECULAR, specular4);
+			glLightfv(GL_LIGHT4, GL_POSITION, position4);
+			glEnable(GL_LIGHT4);
+
+			scale = 1 - scale;
+			GLfloat ambience5[] = { 0.2f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
+			GLfloat diffuse5[] = { 0.8f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
+			GLfloat specular5[] = { 1.0f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
+			GLfloat position5[] = { 0.0, 150.0, -1000.0,1.0 };
+			GLfloat spot5_direction[] = { 0.0f, -1, 0.f };
+			glLightfv(GL_LIGHT5, GL_AMBIENT, ambience5);
+			glLightfv(GL_LIGHT5, GL_DIFFUSE, diffuse5);
+			glLightfv(GL_LIGHT5, GL_SPECULAR, specular5);
+			glLightfv(GL_LIGHT5, GL_POSITION, position5);
+			glLightf(GL_LIGHT5, GL_SPOT_CUTOFF, 30.0);//角度
+			glLightfv(GL_LIGHT5, GL_SPOT_DIRECTION, spot5_direction);//方向
+			glLightf(GL_LIGHT5, GL_SPOT_EXPONENT, 10.5);//*/
+			glEnable(GL_LIGHT5);
+		}
+		else
+		{
+			scale = 1;
+			GLfloat ambience5[] = { 0.2f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
+			GLfloat diffuse5[] = { 0.8f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
+			GLfloat specular5[] = { 1.0f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
+			GLfloat position5[] = { 0.0, 150.0, -1000.0,1.0 };
+			GLfloat spot5_direction[] = { 0.0f, -1, 0.f };
+			glLightfv(GL_LIGHT5, GL_AMBIENT, ambience5);
+			glLightfv(GL_LIGHT5, GL_DIFFUSE, diffuse5);
+			glLightfv(GL_LIGHT5, GL_SPECULAR, specular5);
+			glLightfv(GL_LIGHT5, GL_POSITION, position5);
+			glLightf(GL_LIGHT5, GL_SPOT_CUTOFF, 30.0);//角度
+			glLightfv(GL_LIGHT5, GL_SPOT_DIRECTION, spot5_direction);//方向
+			glLightf(GL_LIGHT5, GL_SPOT_EXPONENT, 10.5);//*/
+			glEnable(GL_LIGHT5);
+		}
+
+	}
 	
-	float x, y, z;
-	Camera* camera = Scene::GetCamera();
-	camera->GetEyePosition(x, y, z);
+	
 
 	if (abs(x - 0) < 200 && abs(z - (-570)) < 10 && abs(y - (1350)) < 10)
 	{
@@ -276,7 +342,7 @@ void Head::Update(const double& deltaTime) {
 		camera->SetCameraPosition(0.f, 50.f, 935.f); //(0.f ,50.f, 935.f)(0., 1350.0f, 500.)
 		
 		_flagStart = true;
-		
+		glEnable(GL_LIGHT0);
 		musicEngine->removeAllSoundSources();
 		musicEngine->play2D("./Media/wood.mp3", true);
 	}
@@ -303,6 +369,10 @@ void Head::Update(const double& deltaTime) {
 		keyframe = -1;
 		musicEngine->removeAllSoundSources();
 		musicEngine->play2D("./Media/back1.wav", true);
+		glDisable(GL_LIGHT3);
+		glDisable(GL_LIGHT0);
+		glDisable(GL_LIGHT4);
+		glDisable(GL_LIGHT5);
 		Soldier::SetLose(false);
 	}
 
