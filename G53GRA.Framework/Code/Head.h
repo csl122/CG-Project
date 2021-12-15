@@ -41,6 +41,7 @@ public:
 	string _tex_path2;
 	string _filename;
 	bool ifWin;
+	static bool _flagStart;
 
 	int _texID;
 	int _texID2;
@@ -63,7 +64,7 @@ private:
 	GLboolean _iKey, _jKey, _kKey, _lKey, _oKey, _uKey;
 	GLboolean _plusKey, _minusKey, _upKey, _downKey, _leftKey, _rightKey, _pageUp, _pageDn;
 	GLboolean _flagReset, _flagAutospin;
-	GLboolean _flagMove, _flagLose, _flagStart;
+	GLboolean _flagMove, _flagLose ;
 
 	GLfloat* _mat_ambient, * _mat_diffuse, * _mat_specular, * _mat_shininess;
 };

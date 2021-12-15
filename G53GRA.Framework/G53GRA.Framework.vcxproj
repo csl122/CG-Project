@@ -7,6 +7,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Code\Bullet.cpp" />
     <ClCompile Include="Code\Doll.cpp" />
     <ClCompile Include="Code\Doors.cpp" />
     <ClCompile Include="Code\Face.cpp" />
@@ -21,6 +22,7 @@
     <ClCompile Include="Code\Soldier.cpp" />
     <ClCompile Include="Code\SoldierShooting.cpp" />
     <ClCompile Include="Code\Swing.cpp" />
+    <ClCompile Include="Code\Timer.cpp" />
     <ClCompile Include="Code\TimeTunnel.cpp" />
     <ClCompile Include="Code\Tri.cpp" />
     <ClCompile Include="Code\Triangle.cpp" />
@@ -37,6 +39,7 @@
     <ClCompile Include="Framework\Utility\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Code\Bullet.h" />
     <ClInclude Include="Code\Doll.h" />
     <ClInclude Include="Code\Doors.h" />
     <ClInclude Include="Code\Face.h" />
@@ -51,6 +54,7 @@
     <ClInclude Include="Code\Soldier.h" />
     <ClInclude Include="Code\SoldierShooting.h" />
     <ClInclude Include="Code\Swing.h" />
+    <ClInclude Include="Code\Timer.h" />
     <ClInclude Include="Code\TimeTunnel.h" />
     <ClInclude Include="Code\Tri.h" />
     <ClInclude Include="Code\Triangle.h" />

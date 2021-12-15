@@ -1,11 +1,13 @@
 #include "Head.h"
 #include "Soldier.h"
 
+bool Head::_flagStart = false;
+
 Head::Head(MyScene* scene, string fileName, Vertex* color, int winding) : WorldObject(scene, 0, "test", 0),
 scene(scene), _flagAutospin(false), ifWin(false), keyframe(-1), animateTime(0.0), animateRotation(0.0), interpA(0.0), interpB(0.0), interpTime(0.0),
 _flagReset(false), _iKey(false), _jKey(false), _kKey(false),
 _lKey(false), _oKey(false), _uKey(false), _plusKey(false), _minusKey(false),
-_upKey(false), _downKey(false), _leftKey(false), _rightKey(false), _flagMove(false), _flagLose(false), _flagStart(false)
+_upKey(false), _downKey(false), _leftKey(false), _rightKey(false), _flagMove(false), _flagLose(false)
 {
 	_filename = fileName;
 	_obj_path = "./Obj/" + _filename + ".obj";
@@ -303,7 +305,7 @@ void Head::Update(const double& deltaTime) {
 			GLfloat ambience5[] = { 0.2f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
 			GLfloat diffuse5[] = { 0.8f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
 			GLfloat specular5[] = { 1.0f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
-			GLfloat position5[] = { 0.0, 150.0, -1000.0,1.0 };
+			GLfloat position5[] = { 0.0, 450.0, -1000.0,1.0 };
 			GLfloat spot5_direction[] = { 0.0f, -1, 0.f };
 			glLightfv(GL_LIGHT5, GL_AMBIENT, ambience5);
 			glLightfv(GL_LIGHT5, GL_DIFFUSE, diffuse5);
@@ -320,7 +322,7 @@ void Head::Update(const double& deltaTime) {
 			GLfloat ambience5[] = { 0.2f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
 			GLfloat diffuse5[] = { 0.8f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
 			GLfloat specular5[] = { 1.0f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
-			GLfloat position5[] = { 0.0, 150.0, -1000.0,1.0 };
+			GLfloat position5[] = { 0.0, 450.0, -1000.0,1.0 };
 			GLfloat spot5_direction[] = { 0.0f, -1, 0.f };
 			glLightfv(GL_LIGHT5, GL_AMBIENT, ambience5);
 			glLightfv(GL_LIGHT5, GL_DIFFUSE, diffuse5);
@@ -351,7 +353,7 @@ void Head::Update(const double& deltaTime) {
 	{
 		ifWin = true;
 		musicEngine->removeAllSoundSources();
-		musicEngine->play2D("./Media/victory.mp3", false);
+		musicEngine->play2D("./Media/win.mp3", false);
 	}
 
 	// Spacebar will reset transformation values

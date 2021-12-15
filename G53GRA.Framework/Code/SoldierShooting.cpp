@@ -10,8 +10,8 @@ _lKey(false), _oKey(false), _uKey(false), _plusKey(false), _minusKey(false),
 _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 {
 
-	_obj_path = "./Obj/SoldierShooting.obj";
-	_tex_path = "./Textures/SoldierShooting.bmp";
+	_obj_path = "./Obj/bullet.obj";
+	_tex_path = "./Textures/bullet.bmp";
 	//_tex_path2 = "Texture/" + fileName + "2.bmp";
 	defaultColor = color;
 
@@ -67,25 +67,11 @@ void SoldierShooting::Display() {
 
 	//rotation[0] = -90.0f;
 
-	float x, y, z;
-	Camera* camera = Scene::GetCamera();
-	camera->GetEyePosition(x, y, z);
 
 	glRotatef(rotation[1], 0.0f, 1.0f, 0.0f); // angle ry about (0,1,0)
 	glRotatef(rotation[2], 0.0f, 0.0f, 1.0f); // angle rz about (0,0,1)
 	glRotatef(rotation[0], 1.0f, 0.0f, 0.0f); // angle rx about (1,0,0)
 
-	float x1 = pos[0];
-	float z1 = -pos[2];
-	float x2 = x- pos[0];
-	float z2 = z- pos[2];
-	float cosine = float((x1 * x2 + z1 * z2) / (sqrt(x1 * x1 + z1 * z1) * sqrt(x2 * x2 + z2 * z2)));
-	float angle = float(acos(cosine) / (2*PI) * 360 * (abs(x)/x));
-
-
-
-	printf("%.2f", angle);
-	glRotatef(180+angle, 0, 1, 0);
 	glMaterialfv(GL_FRONT, GL_AMBIENT, _mat_ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, _mat_diffuse);
 	//glMaterialfv(GL_FRONT, GL_SPECULAR, _mat_specular);
@@ -197,7 +183,30 @@ void SoldierShooting::setOrientation(Vertex* orientation) {
 }
 
 void SoldierShooting::Update(const double& deltaTime) {
+
+
+	float x, y, z;
+	Camera* camera = Scene::GetCamera();
+	camera->GetEyePosition(x, y, z);
+
+	float x1 = pos[0];
+	float z1 = -pos[2];
+	float x2 = x - pos[0];
+	float z2 = z - pos[2];
+	float cosine = float((x1 * x2 + z1 * z2) / (sqrt(x1 * x1 + z1 * z1) * sqrt(x2 * x2 + z2 * z2)));
+	float angle;
+	if (x > 0)
+	{
+		angle = float(acos(cosine) / (2 * PI) * 360);
+	}
+	else
+	{
+		angle = float(acos(cosine) / (2 * PI) * 360 * -1);
+	}
 	
+
+	rotation[1] = 180 + angle;
+
 }
 
 

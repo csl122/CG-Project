@@ -9,10 +9,12 @@ TimeTunnel::TimeTunnel(const std::string& filename) : TimeTunnel()
 
 void TimeTunnel::Display()
 {
+	
+
 
 	glColor3ub(255, 255, 255);
 
-	glutSolidCube(3);
+	//glutSolidCube(3);
 
 	glEnable(GL_TEXTURE_2D);
 

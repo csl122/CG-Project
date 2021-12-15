@@ -14,6 +14,7 @@
 #include "Doll.h"
 #include "Head.h"
 #include "SoldierShooting.h"
+#include "Bullet.h"
 
 MyScene::MyScene(int argc, char** argv, const char *title, const int& windowWidth, const int& windowHeight)
 	: Scene(argc, argv, title, windowWidth, windowHeight){}
@@ -119,9 +120,14 @@ AddObjectToScene(dr);
 	soldierShooting->setScale(objScale);
 	soldierShooting->setPosition(SoldierShootingP);
 	soldierShooting->setOrientation(new Vertex(0, 0, 0));
-	AddObjectToScene(soldierShooting);
+	//AddObjectToScene(soldierShooting);
 
-
+	Vertex* BulletP = new Vertex(0, -100, -900);
+	Bullet* bullet = new Bullet(this, new Vertex(.9677f, .1176f, .1176f), GL_CCW);
+	bullet->setScale(objScale);
+	bullet->setPosition(BulletP);
+	bullet->setOrientation(new Vertex(0, 0, 0));
+	AddObjectToScene(bullet);
 }
 
 /// set the perspective of camera

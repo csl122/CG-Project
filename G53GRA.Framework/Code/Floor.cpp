@@ -11,6 +11,19 @@ void Floor::Display()
 {
 	// Always push before making any changes
 	glPushMatrix();
+
+	glBegin(GL_QUADS);
+
+	glColor3ub(205, 205, 205);
+	glNormal3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(-1100, -99.0f, -705);
+	glVertex3f(-1100, -99.0f,-695);
+	glVertex3f(1100, -99.0f, -695);
+	glVertex3f(1100, -99.0f, -705);
+
+
+	glEnd();
+
 	if (type == 0)
 	{
 		DrawSand();
