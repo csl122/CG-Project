@@ -12,7 +12,7 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false), currentx(0), 
 {
 
 	_obj_path = "./Obj/bullet.obj";
-	_tex_path = "./Textures/bullet.bmp";
+	_tex_path = "./Textures/sky.bmp";
 	//_tex_path2 = "Texture/" + fileName + "2.bmp";
 	defaultColor = color;
 
@@ -219,6 +219,12 @@ void Bullet::Update(const double& deltaTime) {
 		currentz = -0.4f;
 
 	}
+	else
+	{
+		position(vPosition->x, vPosition->y, vPosition->z);
+		currentx = 0.f;
+		currentz = 0.f;
+	}
 
 	// Spacebar will reset transformation values
 	if (_flagReset)
@@ -228,6 +234,8 @@ void Bullet::Update(const double& deltaTime) {
 		orientation(vOrientation->x, vOrientation->y, vOrientation->z);
 		animateRotation = 0;
 		animateTime = 0;
+		currentx = 0.f;
+		currentz = 0.f;
 		_flagReset = false;
 	}
 }

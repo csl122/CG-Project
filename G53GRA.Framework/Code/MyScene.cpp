@@ -120,7 +120,7 @@ AddObjectToScene(dr);
 	soldierShooting->setScale(objScale);
 	soldierShooting->setPosition(SoldierShootingP);
 	soldierShooting->setOrientation(new Vertex(0, 0, 0));
-	//AddObjectToScene(soldierShooting);
+	AddObjectToScene(soldierShooting);
 
 	Vertex* BulletP = new Vertex(0, -100, -900);
 	Bullet* bullet = new Bullet(this, new Vertex(.9677f, .1176f, .1176f), GL_CCW);

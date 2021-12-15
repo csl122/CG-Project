@@ -18,6 +18,22 @@ void TimeTunnel::Display()
 
 	glEnable(GL_TEXTURE_2D);
 
+	glDisable(GL_CULL_FACE);
+	// prompt board
+	glBindTexture(GL_TEXTURE_2D, Scene::GetTexture("./Textures/sky.bmp"));
+	glBegin(GL_QUADS);
+	glNormal3f(0.0f, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1100, 600.f, -1100);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-1100, 600.f, 1100);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1100, 600.f, 1100);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1100, 600.f, -1100);
+	glEnd();
+	glEnable(GL_CULL_FACE);
+
 	// prompt board
 	glBindTexture(GL_TEXTURE_2D, Scene::GetTexture("./Textures/prompt.bmp"));
 	glBegin(GL_QUADS);

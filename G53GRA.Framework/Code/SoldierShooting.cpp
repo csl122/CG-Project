@@ -10,8 +10,8 @@ _lKey(false), _oKey(false), _uKey(false), _plusKey(false), _minusKey(false),
 _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 {
 
-	_obj_path = "./Obj/bullet.obj";
-	_tex_path = "./Textures/bullet.bmp";
+	_obj_path = "./Obj/soldierShooting.obj";
+	_tex_path = "./Textures/soldierShooting.bmp";
 	//_tex_path2 = "Texture/" + fileName + "2.bmp";
 	defaultColor = color;
 

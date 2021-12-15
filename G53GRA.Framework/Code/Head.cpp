@@ -273,6 +273,8 @@ void Head::Update(const double& deltaTime) {
 				Soldier::SetLose(true);
 				musicEngine->removeAllSoundSources();
 				musicEngine->play2D("./Media/lose.mp3", false);
+				musicEngine->play2D("./Media/gun.mp3", false);
+
 				printf("los!!!!!!!");
 			}
 			GLfloat spot3_direction[] = { 0.0,-1 - -1.0 *(animateRotation/interpTime),1.0 };

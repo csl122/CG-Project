@@ -113,7 +113,7 @@ void Camera::Update(const double& deltaTime)
 	}
 
 	float lrlimit = 1000.f;
-	float uplimit = 600.f;
+	float uplimit = 550.f;
 	float btlimit = 50.f;
 	float fblimit = 1000.f;
 	float ublimit = 1000.f;
@@ -121,7 +121,7 @@ void Camera::Update(const double& deltaTime)
 	if (eyePosition[1] >= 50.0f && eyePosition[1] <= 600.0f)
 	{
 		lrlimit = 1000.f;
-		uplimit = 600.f;
+		uplimit = 550.f;
 		btlimit = 50.f;
 		fblimit = 1000.f;
 		ublimit = 1000.f;
