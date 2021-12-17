@@ -1,6 +1,7 @@
 #include "Head.h"
 #include "Soldier.h"
 
+// global bool for the game status
 bool Head::_flagStart = false;
 bool Head::ifWin = false;
 
@@ -13,7 +14,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false), _flagMove(fal
 	_filename = fileName;
 	_obj_path = "./Obj/" + _filename + ".obj";
 	_tex_path = "./Textures/" + _filename + ".bmp";
-	//_tex_path2 = "Texture/" + fileName + "2.bmp";
 	defaultColor = color;
 
 	objectFileReader = new ObjectFileReader(_obj_path);
@@ -27,7 +27,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false), _flagMove(fal
 
 	_texID = scene->GetTexture(_tex_path);
 
-	//glFrontFace(winding);
 
 	static GLfloat mat_ambient[] = { 1.f, 1.f, 1.f, 1.f };
 	// Define the diffuse material colour property K_d
@@ -44,9 +43,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false), _flagMove(fal
 
 	size(_INIT_SIZE);
 	pos[2] = _DEF_Z * 2;
-
-
-	//_texID2 = scene->GetTexture(_tex_path2);
 }
 
 
@@ -70,8 +66,6 @@ void Head::Display() {
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, _mat_ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, _mat_diffuse);
-	//glMaterialfv(GL_FRONT, GL_SPECULAR, _mat_specular);
-	//glMaterialf(GL_FRONT, GL_SHININESS, _mat_shininess[0]);
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, _texID);
 	glColor3f(1, 1, 1);
@@ -85,21 +79,8 @@ void Head::Display() {
 }
 
 void Head::Render() {
-	//glEnable(GL_TEXTURE_2D);
-	//glEnable(GL_COLOR_MATERIAL);
-
-	//glBindTexture(GL_TEXTURE_2D, textureId);
-	//float light_position[] = { 0.0f, 1.0f, 0.0f, 0.0f };
-	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	//glColor3f(defaultColor->x, defaultColor->y, defaultColor->z);
-
-	//auto alreadyRenderedFaces = false;
-	//auto currentTextureId = Materials::NONE;
-
 
 	for (size_t faceId = 0; faceId < faces.size(); faceId++) {
-		//auto faceMaterial = faceMaterials[faceId];
-		//auto textureChanged = faceMaterial != currentTexture;
 
 		Face* face = faces[faceId];
 		glColor3f(1.f, 1.f, 1.f);
@@ -145,7 +126,6 @@ void Head::RenderVertex(int vertexIndex) {
 void Head::RenderNormal(int normalIndex) {
 	auto normal = normals[normalIndex];
 	glNormal3f(normal->x, normal->y, normal->z);
-	//glColor3f(normal->x, normal->y, normal->z);
 }
 
 void Head::RenderMaterial(int materialIndex) {
@@ -164,7 +144,6 @@ void Head::setScale(Vertex* size) {
 
 void Head::setPosition(Vertex* position) {
 	this->vPosition = position;
-	//position(vPosition->x, vPosition->y, vPosition->z);
 	pos[0] = vPosition->x;
 	pos[1] = vPosition->y;
 	pos[2] = vPosition->z;
@@ -196,19 +175,17 @@ void Head::Update(const double& deltaTime) {
 		animateTime += static_cast<float>(deltaTime);
 		animateRotation += static_cast<float>(deltaTime);
 
-		// check if we hit the end of the animation (3 seconds), if so reset
+		// turn head every 8 seconds
 		if (animateTime >= 8.0f)
 		{
 			animateTime = 0.0f;
 			keyframe = -1;
 		}
 
-		// check if we are in the 1st second of animation
 		if (animateTime < 0.5f)
 		{
 			
-			// check if we have only just entered the 1st keyframe in which case
-			// set up the parameters
+			// initial status
 			if (keyframe != 0)
 			{
 				animateTime = 0.0f;
@@ -223,11 +200,9 @@ void Head::Update(const double& deltaTime) {
 				glDisable(GL_LIGHT3);
 			}
 		}
-		// check if we are in the 1.0 to 1.25 seconds of animation
+		// not move
 		else if (animateTime < 5.f)
 		{
-			// check if we have only just entered the 2nd keyframe in which case 
-			// set up the parameters
 			if (keyframe != 1)
 			{
 				keyframe = 1;
@@ -238,10 +213,9 @@ void Head::Update(const double& deltaTime) {
 			}
 			
 		}
+		// turning head
 		else if (animateTime < 5.7f)
 		{
-			// check if we have only just entered the 2nd keyframe in which case 
-			// set up the parameters
 			if (keyframe != 2)
 			{
 				keyframe = 2;
@@ -253,7 +227,7 @@ void Head::Update(const double& deltaTime) {
 		}
 		else
 		{
-			
+			// facing to the user
 			if (keyframe != 3)
 			{
 				keyframe = 3;
@@ -268,6 +242,8 @@ void Head::Update(const double& deltaTime) {
 				glEnable(GL_LIGHT3);
 				
 			}
+
+			// lose if motion is detected
 			if (_flagMove && abs(y - (50)) < 20)
 			{
 				_flagLose = true;
@@ -278,12 +254,14 @@ void Head::Update(const double& deltaTime) {
 
 				
 			}
+
+			//scanning light
 			GLfloat spot3_direction[] = { 0.0,-1 - -1.0 *(animateRotation/interpTime),1.0 };
 			glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, spot3_direction);
 		}
 	}
 	
-
+	// set lose lighting
 	if (_flagLose)
 	{
 		float scale = 1.f;
@@ -293,6 +271,7 @@ void Head::Update(const double& deltaTime) {
 		animateRotation += static_cast<float>(deltaTime);
 		if (animateRotation < 3)
 		{
+			//directional 4
 			scale = 1- scale * (animateRotation / 3);
 			GLfloat ambience4[] = { 0.2f* scale, 0.2f * scale, 0.2f * scale, 1.0f };
 			GLfloat diffuse4[] = { 0.5f * scale, 0.5f * scale, 0.5f * scale, 1.0f };
@@ -304,6 +283,7 @@ void Head::Update(const double& deltaTime) {
 			glLightfv(GL_LIGHT4, GL_POSITION, position4);
 			glEnable(GL_LIGHT4);
 
+			// spotlight 5
 			scale = 1 - scale;
 			GLfloat ambience5[] = { 0.2f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
 			GLfloat diffuse5[] = { 0.8f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
@@ -314,13 +294,14 @@ void Head::Update(const double& deltaTime) {
 			glLightfv(GL_LIGHT5, GL_DIFFUSE, diffuse5);
 			glLightfv(GL_LIGHT5, GL_SPECULAR, specular5);
 			glLightfv(GL_LIGHT5, GL_POSITION, position5);
-			glLightf(GL_LIGHT5, GL_SPOT_CUTOFF, 30.0);//角度
-			glLightfv(GL_LIGHT5, GL_SPOT_DIRECTION, spot5_direction);//方向
-			glLightf(GL_LIGHT5, GL_SPOT_EXPONENT, 10.5);//*/
+			glLightf(GL_LIGHT5, GL_SPOT_CUTOFF, 30.0);//angle
+			glLightfv(GL_LIGHT5, GL_SPOT_DIRECTION, spot5_direction);//direction
+			glLightf(GL_LIGHT5, GL_SPOT_EXPONENT, 10.5);
 			glEnable(GL_LIGHT5);
 		}
 		else
 		{
+			// spotlight 5
 			scale = 1;
 			GLfloat ambience5[] = { 0.2f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
 			GLfloat diffuse5[] = { 0.8f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
@@ -331,19 +312,19 @@ void Head::Update(const double& deltaTime) {
 			glLightfv(GL_LIGHT5, GL_DIFFUSE, diffuse5);
 			glLightfv(GL_LIGHT5, GL_SPECULAR, specular5);
 			glLightfv(GL_LIGHT5, GL_POSITION, position5);
-			glLightf(GL_LIGHT5, GL_SPOT_CUTOFF, 30.0);//角度
-			glLightfv(GL_LIGHT5, GL_SPOT_DIRECTION, spot5_direction);//方向
-			glLightf(GL_LIGHT5, GL_SPOT_EXPONENT, 10.5);//*/
+			glLightf(GL_LIGHT5, GL_SPOT_CUTOFF, 30.0);
+			glLightfv(GL_LIGHT5, GL_SPOT_DIRECTION, spot5_direction);
+			glLightf(GL_LIGHT5, GL_SPOT_EXPONENT, 10.5);
 			glEnable(GL_LIGHT5);
 		}
 
 	}
 	
 	
-
+	// starting
 	if (abs(x - 0) < 200 && abs(z - (-570)) < 10 && abs(y - (1350)) < 10)
 	{
-		//camera->Reset();
+		//transmit user to the playground and start the game
 		camera->SetCameraPosition(0.f, 50.f, 935.f); //(0.f ,50.f, 935.f)(0., 1350.0f, 500.)
 		
 		_flagStart = true;
@@ -352,6 +333,7 @@ void Head::Update(const double& deltaTime) {
 		musicEngine->play2D("./Media/wood.mp3", true);
 	}
 
+	// winning
 	if (!ifWin && z < -700 && abs(y - (50)) < 20 && !_flagLose)
 	{
 		ifWin = true;
@@ -359,7 +341,7 @@ void Head::Update(const double& deltaTime) {
 		musicEngine->play2D("./Media/win.mp3", false);
 	}
 
-	// Spacebar will reset transformation values
+	// resetting
 	if (_flagReset)
 	{
 		
@@ -436,15 +418,6 @@ void Head::Update(const double& deltaTime) {
 	[/\]
 	[<-][\/][->]
 	translate along x and y axes, for (left, right) and (up, down) respectively
-	*/
-
-	/*
-	faceY
-		up = 0;
-		down = 1;
-	faceX
-		left = 0;
-		right = 1;
 	*/
 	float current = rotation[1];
 
@@ -543,10 +516,6 @@ void Head::HandleKey(unsigned char key, int state, int x, int y)
 	case 'D':
 		_flagMove = static_cast<GLboolean>(state);
 		break;
-		//if (state == 0) {
-			//_flagAutospin = !_flagAutospin;
-			//break;
-		//}
 	}
 }
 

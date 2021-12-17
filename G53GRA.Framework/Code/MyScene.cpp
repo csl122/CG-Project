@@ -8,7 +8,6 @@
 #include "Swing.h"
 #include "Slider.h"
 #include "Doors.h"
-#include "Triforce.h"
 #include "ModelObject.h"
 #include "Soldier.h"
 #include "Doll.h"
@@ -25,8 +24,7 @@ void MyScene::Initialise()
 	// set the background colour of the scene to black
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-	// DEMO 5
-	// Show floor and triangle
+	// textured objects
 #ifdef __APPLE__
 	Floor* f = new Floor("./ground.bmp");
 #else
@@ -36,7 +34,6 @@ void MyScene::Initialise()
 	TimeTunnel* tt = new TimeTunnel("./Textures/tunnel.bmp");
 	
 #endif
-	//Floor *f = new Floor();
 	
 	Triangle *t = new Triangle();
 	Turntable* l = new Turntable();
@@ -44,7 +41,6 @@ void MyScene::Initialise()
 	Swing* sw = new Swing();
 	Slider* sl = new Slider();
 	Doors* dr = new Doors();
-	Triforce* tf = new Triforce();
 	f->size(100.0f);
 	r->size(100.0f);
 	w->size(100.0f);
@@ -60,12 +56,9 @@ void MyScene::Initialise()
 	sl->position(560, -90, 470);
 	dr->size(1.f);
 	dr->position(0, 80, -1100);
-	tf->size(1.f);
-	tf->position(0,20, 0);
 
 
-
-AddObjectToScene(dr);
+	AddObjectToScene(dr);
 	AddObjectToScene(l);
 	AddObjectToScene(f);
 	AddObjectToScene(t);
@@ -75,10 +68,9 @@ AddObjectToScene(dr);
 	AddObjectToScene(fw);
 	AddObjectToScene(sw);
 	AddObjectToScene(sl);
-	//AddObjectToScene(tf);
 	
 
-
+	// soldierLeft
 	Vertex* objScale = new Vertex(35, 35, 35);
 	Vertex* soldierP = new Vertex(-300, -100, -1000);
 	Soldier* soldier = new Soldier(this, "squid", "soldierLeft", new Vertex(.3f, .3f, .4f), GL_CCW);
@@ -87,7 +79,7 @@ AddObjectToScene(dr);
 	soldier->setOrientation(new Vertex(0, 180, 0));
 	AddObjectToScene(soldier);
 
-
+	// soldierRight
 	Vertex* soldier2P = new Vertex(300, -100, -1000);
 	Soldier* soldier2 = new Soldier(this, "squid", "soldierRight", new Vertex(.3f, .3f, .4f), GL_CCW);
 	soldier2->setScale(objScale);
@@ -95,6 +87,7 @@ AddObjectToScene(dr);
 	soldier2->setOrientation(new Vertex(0, 180, 0));
 	AddObjectToScene(soldier2);
 
+	// body of doll
 	Vertex* dollP = new Vertex(0, -100, -1000);
 	Doll* doll = new Doll(this, "body", new Vertex(.3f, .3f, .4f), GL_CCW);
 	doll->setScale(objScale);
@@ -102,6 +95,7 @@ AddObjectToScene(dr);
 	doll->setOrientation(new Vertex(0, 0, 0));
 	AddObjectToScene(doll);
 
+	// head of doll
 	Vertex* headP = new Vertex(0, -100, -1000);
 	Head* head = new Head(this, "head", new Vertex(.3f, .3f, .4f), GL_CCW);
 	head->setScale(objScale);
@@ -109,6 +103,7 @@ AddObjectToScene(dr);
 	head->setOrientation(new Vertex(0, 0, 0));
 	AddObjectToScene(head);
 
+	// triangle door
 	Vertex* triangleP = new Vertex(300, 70, -1100);
 	ModelObject* triangle = new ModelObject(this, "triangle", new Vertex(.9677f, .1176f, .1176f), GL_CCW);
 	triangle->setScale(objScale);
@@ -116,6 +111,7 @@ AddObjectToScene(dr);
 	triangle->setOrientation(new Vertex(0, 180, 0));
 	AddObjectToScene(triangle);
 
+	// shooting soldier
 	Vertex* SoldierShootingP = new Vertex(0, -100, -900);
 	SoldierShooting* soldierShooting = new SoldierShooting(this, new Vertex(.9677f, .1176f, .1176f), GL_CCW);
 	soldierShooting->setScale(objScale);
@@ -123,6 +119,7 @@ AddObjectToScene(dr);
 	soldierShooting->setOrientation(new Vertex(0, 0, 0));
 	AddObjectToScene(soldierShooting);
 
+	// bullet of the gun
 	Vertex* BulletP = new Vertex(0, -100, -900);
 	Bullet* bullet = new Bullet(this, new Vertex(.9677f, .1176f, .1176f), GL_CCW);
 	bullet->setScale(objScale);
@@ -130,6 +127,7 @@ AddObjectToScene(dr);
 	bullet->setOrientation(new Vertex(0, 0, 0));
 	AddObjectToScene(bullet);
 
+	// timer
 	Vertex* TimerP = new Vertex(0, -100, -900);
 	Timer* timer = new Timer(this, "0", new Vertex(.9677f, .1176f, .1176f), GL_CCW);
 	timer->setScale(objScale);

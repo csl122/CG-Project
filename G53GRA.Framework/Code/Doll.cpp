@@ -9,7 +9,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 	_filename = fileName;
 	_obj_path = "./Obj/" + _filename + ".obj";
 	_tex_path = "./Textures/" + _filename + ".bmp";
-	//_tex_path2 = "Texture/" + fileName + "2.bmp";
 	defaultColor = color;
 
 	objectFileReader = new ObjectFileReader(_obj_path);
@@ -23,7 +22,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 
 	_texID = scene->GetTexture(_tex_path);
 
-	//glFrontFace(winding);
 
 	static GLfloat mat_ambient[] = { 1.f, 1.f, 1.f, 1.f };
 	// Define the diffuse material colour property K_d
@@ -41,8 +39,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 	size(_INIT_SIZE);
 	pos[2] = _DEF_Z * 2;
 
-
-	//_texID2 = scene->GetTexture(_tex_path2);
 }
 
 
@@ -64,8 +60,7 @@ void Doll::Display() {
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, _mat_ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, _mat_diffuse);
-	//glMaterialfv(GL_FRONT, GL_SPECULAR, _mat_specular);
-	//glMaterialf(GL_FRONT, GL_SHININESS, _mat_shininess[0]);
+
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, _texID);
 	glColor3f(1, 1, 1);
@@ -79,21 +74,8 @@ void Doll::Display() {
 }
 
 void Doll::Render() {
-	//glEnable(GL_TEXTURE_2D);
-	//glEnable(GL_COLOR_MATERIAL);
-
-	//glBindTexture(GL_TEXTURE_2D, textureId);
-	//float light_position[] = { 0.0f, 1.0f, 0.0f, 0.0f };
-	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	//glColor3f(defaultColor->x, defaultColor->y, defaultColor->z);
-
-	//auto alreadyRenderedFaces = false;
-	//auto currentTextureId = Materials::NONE;
-
 
 	for (size_t faceId = 0; faceId < faces.size(); faceId++) {
-		//auto faceMaterial = faceMaterials[faceId];
-		//auto textureChanged = faceMaterial != currentTexture;
 
 		Face* face = faces[faceId];
 		glColor3f(1.f, 1.f, 1.f);
@@ -172,8 +154,7 @@ void Doll::setOrientation(Vertex* orientation) {
 	rotation[2] = vOrientation->z;
 }
 
-#include <mmsystem.h>
-#pragma comment(lib, "winmm.lib")
+
 void Doll::Update(const double& deltaTime) {
 	float velocity = 100.0f * static_cast<float>(deltaTime);
 	float shrinkRate = -5.0f * static_cast<float>(deltaTime);
@@ -182,32 +163,10 @@ void Doll::Update(const double& deltaTime) {
 	Camera* camera = Scene::GetCamera();
 	camera->GetEyePosition(x, y, z);
 
-	if (!ifWin && z < -700 && abs(y - (50)) < 10)
-	{
-		//ifWin = true;
-		//_filename = "gun";
-		//_obj_path = "./Obj/" + _filename + ".obj";
-		//_tex_path = "./Textures/" + _filename + ".bmp";
-		////_tex_path2 = "Texture/" + fileName + "2.bmp";
-
-
-		//objectFileReader = new ObjectFileReader(_obj_path);
-		//objectFileReader->Load();
-
-		//vertices = objectFileReader->vertices;
-		//normals = objectFileReader->normals;
-		//textureCoordinates = objectFileReader->textureCoordinates;
-		//faces = objectFileReader->faces;
-		//faceMaterials = objectFileReader->faceMaterials;
-
-		//_texID = scene->GetTexture(_tex_path);
-		//camera->SetCameraPosition(0.f, 50.f, 935.f); //(0.f ,50.f, 935.f)(0., 1350.0f, 500.)
-	}
 
 	// Spacebar will reset transformation values
 	if (_flagReset)
 	{
-		PlaySound(TEXT("naruto.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		size(vSize->x, vSize->y, vSize->z);
 		position(vPosition->x, vPosition->y, vPosition->z);
 		orientation(vOrientation->x, vOrientation->y, vOrientation->z);
@@ -264,20 +223,13 @@ void Doll::Update(const double& deltaTime) {
 		scale[2] -= shrinkRate;
 	}
 
+
+
 	/*
 	If keys pressed down:
 	[/\]
 	[<-][\/][->]
 	translate along x and y axes, for (left, right) and (up, down) respectively
-	*/
-
-	/*
-	faceY
-		up = 0;
-		down = 1;
-	faceX
-		left = 0;
-		right = 1;
 	*/
 	float current = rotation[1];
 
@@ -330,21 +282,27 @@ void Doll::HandleKey(unsigned char key, int state, int x, int y)
 	switch (key)
 	{
 	case 'i':
+	case 'I':
 		_iKey = static_cast<GLboolean>(state);
 		break;
 	case 'j':
+	case 'J':
 		_jKey = static_cast<GLboolean>(state);
 		break;
 	case 'k':
+	case 'K':
 		_kKey = static_cast<GLboolean>(state);
 		break;
 	case 'l':
+	case 'L':
 		_lKey = static_cast<GLboolean>(state);
 		break;
 	case 'o':
+	case 'O':
 		_oKey = static_cast<GLboolean>(state);
 		break;
 	case 'u':
+	case 'U':
 		_uKey = static_cast<GLboolean>(state);
 		break;
 	case '+': // with shift
@@ -355,14 +313,11 @@ void Doll::HandleKey(unsigned char key, int state, int x, int y)
 		_minusKey = static_cast<GLboolean>(state);
 		break;
 	case 'b':
+	case 'B':
 		_flagReset = true;
 		break;
 	case 'f':
 		break;
-		//if (state == 0) {
-			//_flagAutospin = !_flagAutospin;
-			//break;
-		//}
 	}
 }
 

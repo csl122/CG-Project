@@ -13,7 +13,7 @@ void Camera::Reset(){
 	// set the camera position to start at (0,0,0)
 	eyePosition[0] = 0.0f;
 	eyePosition[1] = 1350.0f; //1350 50
-	eyePosition[2] = 300.f;//0.8f * static_cast<float>(Scene::GetWindowHeight()) / static_cast<float>(tan(M_PI / 6.0));//0.0f;
+	eyePosition[2] = 120.f;//0.8f * static_cast<float>(Scene::GetWindowHeight()) / static_cast<float>(tan(M_PI / 6.0));//0.0f;
 
 	// set the view direction vector of the camera to be (0,0,-1)
 	vd[0] = 0.0f;
@@ -84,23 +84,27 @@ void Camera::Update(const double& deltaTime)
 	bool _flagLose = Soldier::_flagLose;
 	sensitivity = 0.0016f;
 	ISoundEngine* musicEngine = Scene::GetMusicEngine();
-
+	
+	// in case not lose game
 	if (!_flagLose)
 	{
-
+		// reset animate time
 		animateTime = 0;
+		
+		// footstep sound 
 		if ((aKey || dKey || wKey || sKey) && musicflat && !uKey && !bKey && (abs(eyePosition[1] - (50)) < 20 || abs(eyePosition[1] - (1350)) < 20)) {
 			irrklang::ISound* runSound = musicEngine->play2D("./Media/run.mp3", true);
 			if (runSound)
 				runSound->setVolume(0.02f);
 			musicflat = 0;
 		}
-
+		// disable footstep while flying
 		if (!aKey && !dKey && !wKey && !sKey && !musicflat || uKey || bKey) {
 			musicEngine->removeSoundSource("./Media/run.mp3");
 			musicflat = 1;
 		}
 
+		// limit activity range
 		if (eyePosition[0] <= 1000.0f && eyePosition[0] >= -1000.0f && eyePosition[2] <= 1000.0f && eyePosition[2] >= -1000.0f) {
 
 			if (aKey)
@@ -118,12 +122,14 @@ void Camera::Update(const double& deltaTime)
 				sub(eyePosition, forward, speed);
 		}
 
+		//initialise limitations
 		float lrlimit = 1000.f;
 		float uplimit = 550.f;
 		float btlimit = 50.f;
 		float fblimit = 1000.f;
 		float ublimit = 1000.f;
 
+		// set limitations in different places
 		if (eyePosition[1] >= 50.0f && eyePosition[1] <= 600.0f)
 		{
 			lrlimit = 1000.f;
@@ -141,6 +147,7 @@ void Camera::Update(const double& deltaTime)
 			ublimit = 470.f;
 		}
 
+		// restore position when out of range
 		if (eyePosition[0] > lrlimit)
 			eyePosition[0] = lrlimit;
 
@@ -157,10 +164,12 @@ void Camera::Update(const double& deltaTime)
 			eyePosition[1] = uplimit;
 
 
+		// fly/god mode
 		if (uKey)
 			if (eyePosition[1] <= uplimit)
 				add(eyePosition, up, speed);
 
+		// go down
 		if (bKey)
 			if (eyePosition[1] >= btlimit)
 				sub(eyePosition, up, speed);
@@ -207,17 +216,16 @@ void Camera::Update(const double& deltaTime)
 	}
 	else
 	{
-	animateTime += static_cast<float>(deltaTime);
-	if (animateTime < 1.f)
-	{
-		up[0] = 1.0f * animateTime / 1.0f;
-		up[1] = 1.0f - 1.0f * animateTime / 1.0f;
-		up[2] = 0.0f;
-	}
+	// while lose the game, set death animation
+		animateTime += static_cast<float>(deltaTime);
+		if (animateTime < 1.f)
+		{
+			up[0] = 1.0f * animateTime / 1.0f;
+			up[1] = 1.0f - 1.0f * animateTime / 1.0f;
+			up[2] = 0.0f;
+		}
 	
 	}
-
-		
 	
 	SetupCamera();
 }
@@ -340,10 +348,9 @@ void Camera::HandleMouseDrag(int x, int y)
 	float rx, ry;
 	float sensitivity = 0.01f; // speed of the camera moving
 
+	// only able to change view when not lose
 	if (!_flagLose)
 	{
-
-
 		// work out the difference between where the mouse was last used (mouseX, mouseY) to
 		// position the view direction and the current position (x, y) the mouse is in
 		rx = static_cast<float>(x - mouseX);

@@ -13,7 +13,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false), currentx(0), 
 
 	_obj_path = "./Obj/bullet.obj";
 	_tex_path = "./Textures/sky.bmp";
-	//_tex_path2 = "Texture/" + fileName + "2.bmp";
 	defaultColor = color;
 
 	objectFileReader = new ObjectFileReader(_obj_path);
@@ -27,7 +26,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false), currentx(0), 
 
 	_texID = scene->GetTexture(_tex_path);
 
-	//glFrontFace(winding);
 
 	static GLfloat mat_ambient[] = { 1.f, 1.f, 1.f, 1.f };
 	// Define the diffuse material colour property K_d
@@ -45,8 +43,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false), currentx(0), 
 	size(_INIT_SIZE);
 	pos[2] = _DEF_Z * 2;
 
-
-	//_texID2 = scene->GetTexture(_tex_path2);
 }
 
 
@@ -74,8 +70,7 @@ void Bullet::Display() {
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, _mat_ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, _mat_diffuse);
-	//glMaterialfv(GL_FRONT, GL_SPECULAR, _mat_specular);
-	//glMaterialf(GL_FRONT, GL_SHININESS, _mat_shininess[0]);
+	
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, _texID);
 	glColor3f(1, 1, 1);
@@ -89,22 +84,8 @@ void Bullet::Display() {
 }
 
 void Bullet::Render() {
-	//glEnable(GL_TEXTURE_2D);
-	//glEnable(GL_COLOR_MATERIAL);
-
-	//glBindTexture(GL_TEXTURE_2D, textureId);
-	//float light_position[] = { 0.0f, 1.0f, 0.0f, 0.0f };
-	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	//glColor3f(defaultColor->x, defaultColor->y, defaultColor->z);
-
-	//auto alreadyRenderedFaces = false;
-	//auto currentTextureId = Materials::NONE;
-
 
 	for (size_t faceId = 0; faceId < faces.size(); faceId++) {
-		//auto faceMaterial = faceMaterials[faceId];
-		//auto textureChanged = faceMaterial != currentTexture;
-
 		Face* face = faces[faceId];
 		glColor3f(1.f, 1.f, 1.f);
 		if (face->faceData->size() == 3) {
@@ -149,7 +130,6 @@ void Bullet::RenderVertex(int vertexIndex) {
 void Bullet::RenderNormal(int normalIndex) {
 	auto normal = normals[normalIndex];
 	glNormal3f(normal->x, normal->y, normal->z);
-	//glColor3f(normal->x, normal->y, normal->z);
 }
 
 void Bullet::RenderMaterial(int materialIndex) {
@@ -168,7 +148,6 @@ void Bullet::setScale(Vertex* size) {
 
 void Bullet::setPosition(Vertex* position) {
 	this->vPosition = position;
-	//position(vPosition->x, vPosition->y, vPosition->z);
 	pos[0] = vPosition->x;
 	pos[1] = vPosition->y;
 	pos[2] = vPosition->z;
@@ -184,10 +163,12 @@ void Bullet::setOrientation(Vertex* orientation) {
 
 void Bullet::Update(const double& deltaTime) {
 
+	// get player's position for aiming
 	float x, y, z;
 	Camera* camera = Scene::GetCamera();
 	camera->GetEyePosition(x, y, z);
 
+	// calculating facing direction
 	float x1 = vPosition->x;
 	float z1 = -vPosition->z;
 	float x2 = x - vPosition->x;
@@ -202,14 +183,12 @@ void Bullet::Update(const double& deltaTime) {
 	{
 		angle = float(acos(cosine) / (2 * PI) * 360 * -1);
 	}
-
-
 	rotation[1] = 180 + angle;
 
+	// shoot the bullet when lose the game
 	if (Soldier::_flagLose && animateRotation < 1)
 	{
 
-		printf("!!!");
 		animateTime += static_cast<float>(deltaTime);
 		animateRotation += static_cast<float>(deltaTime);
 
@@ -226,7 +205,7 @@ void Bullet::Update(const double& deltaTime) {
 		currentz = 0.f;
 	}
 
-	// Spacebar will reset transformation values
+	// reset status of bullet
 	if (_flagReset)
 	{
 		size(vSize->x, vSize->y, vSize->z);
@@ -252,12 +231,6 @@ void Bullet::HandleKey(unsigned char key, int state, int x, int y)
 	case 'B':
 		_flagReset = true;
 		break;
-	case 'f':
-		break;
-		//if (state == 0) {
-			//_flagAutospin = !_flagAutospin;
-			//break;
-		//}
 	}
 }
 

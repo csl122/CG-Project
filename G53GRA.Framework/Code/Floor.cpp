@@ -1,6 +1,6 @@
 #include "Floor.h"
 
-
+// The sandy floor
 Floor::Floor(const std::string& filename, int floortype) : Floor()
 {
 	texID = Scene::GetTexture(filename);
@@ -36,6 +36,7 @@ void Floor::Display()
 
 }
 
+//sandy playground
 void Floor::DrawSand()
 {
 	// Draws an exciting chequered floor
@@ -44,10 +45,8 @@ void Floor::DrawSand()
 
 	// Enable Texturing
 	glEnable(GL_TEXTURE_2D);
-	//glDisable(GL_COLOR_MATERIAL);
 	glEnable(GL_COLOR_MATERIAL);
-	float bDiffuse[] = { 0.0f,0.0f,0.0f,1.0f }; //black
-	float wDiffuse[] = { 1.0f,1.0f,1.0f,1.0f }; //white
+
 	float specular[] = { 0.86f,0.75f,0.61f,1.0f };
 	float shininess = 1.0f;
 
@@ -63,20 +62,6 @@ void Floor::DrawSand()
 	{
 		for (int j = -11; j < 11; j++)
 		{
-			/*if (i % 2)
-			{
-				if (j % 2)
-					glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, static_cast<GLfloat*>(bDiffuse));
-				else
-					glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, static_cast<GLfloat*>(wDiffuse));
-			}
-			else
-			{
-				if (j % 2)
-					glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, static_cast<GLfloat*>(wDiffuse));
-				else
-					glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, static_cast<GLfloat*>(bDiffuse));
-			}*/
 
 			glNormal3f(0.0f, 1.0f, 0.0f);
 			glTexCoord2f(1.0f, 0.0f);
@@ -91,7 +76,6 @@ void Floor::DrawSand()
 	}
 	glEnd();
 
-	//glEnable(GL_COLOR_MATERIAL);
 	glDisable(GL_COLOR_MATERIAL);
 	glBindTexture(GL_TEXTURE_2D, NULL);
 	// Stop performing texturing
@@ -101,7 +85,7 @@ void Floor::DrawSand()
 	glPopMatrix();
 }
 
-
+// path in the tunnel
 void Floor::DrawPath()
 {
 	// Draws an exciting chequered floor
@@ -112,8 +96,6 @@ void Floor::DrawPath()
 	glEnable(GL_TEXTURE_2D);
 	//glDisable(GL_COLOR_MATERIAL);
 	glEnable(GL_COLOR_MATERIAL);
-	float bDiffuse[] = { 0.0f,0.0f,0.0f,1.0f }; //black
-	float wDiffuse[] = { 1.0f,1.0f,1.0f,1.0f }; //white
 	float specular[] = { 0.86f,0.75f,0.61f,1.0f };
 	float shininess = 1.0f;
 
@@ -129,20 +111,6 @@ void Floor::DrawPath()
 	{
 		for (int j = -6; j < 6; j++)
 		{
-			/*if (i % 2)
-			{
-				if (j % 2)
-					glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, static_cast<GLfloat*>(bDiffuse));
-				else
-					glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, static_cast<GLfloat*>(wDiffuse));
-			}
-			else
-			{
-				if (j % 2)
-					glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, static_cast<GLfloat*>(wDiffuse));
-				else
-					glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, static_cast<GLfloat*>(bDiffuse));
-			}*/
 
 			glNormal3f(0.0f, 1.0f, 0.0f);
 			glTexCoord2f(1.0f, 0.0f);

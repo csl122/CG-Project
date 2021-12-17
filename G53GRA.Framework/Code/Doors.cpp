@@ -48,7 +48,8 @@ void Doors::DrawDoors()
 	float h = 0.25;
 	float scale = 0.7;
 
-	glBegin(GL_QUAD_STRIP);//连续填充四边形串
+	// outside circle
+	glBegin(GL_QUAD_STRIP);
 	int i = 0;
 	for (i = 360; i >= 0; i -= 15)
 	{
@@ -64,7 +65,8 @@ void Doors::DrawDoors()
 	}
 	glEnd();
 
-	glBegin(GL_QUAD_STRIP);//连续填充四边形串
+	// inside circle
+	glBegin(GL_QUAD_STRIP);
 	i = 0;
 	for (i = 360; i >= 0; i -= 15)
 	{
@@ -80,7 +82,8 @@ void Doors::DrawDoors()
 	}
 	glEnd();
 
-	glBegin(GL_QUAD_STRIP);//连续填充四边形串
+	// upper surface
+	glBegin(GL_QUAD_STRIP);
 	i = 0;
 	for (i = 360; i >= 0; i -= 15)
 	{
@@ -88,7 +91,6 @@ void Doors::DrawDoors()
 		float x = float(sin(p));
 		float z = float(cos(p));
 
-		// inner
 		glNormal3f(0, 1, 0);
 		glVertex3f(scale * x, h, scale * z);
 		glNormal3f(0, 1, 0);

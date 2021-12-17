@@ -1,6 +1,6 @@
 #include "Framework.h"
 
-
+// a framework in the playground
 Framework::Framework(const std::string& filename) : Framework()
 {
 	texID = Scene::GetTexture(filename);

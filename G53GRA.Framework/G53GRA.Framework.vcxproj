@@ -28,7 +28,6 @@
     <ClCompile Include="Code\Triangle.cpp" />
     <ClCompile Include="Code\main.cpp" />
     <ClCompile Include="Code\MyScene.cpp" />
-    <ClCompile Include="Code\Triforce.cpp" />
     <ClCompile Include="Code\Turntable.cpp" />
     <ClCompile Include="Code\Vertex.cpp" />
     <ClCompile Include="Code\Wall.cpp" />
@@ -59,7 +58,6 @@
     <ClInclude Include="Code\Tri.h" />
     <ClInclude Include="Code\Triangle.h" />
     <ClInclude Include="Code\MyScene.h" />
-    <ClInclude Include="Code\Triforce.h" />
     <ClInclude Include="Code\Turntable.h" />
     <ClInclude Include="Code\Vertex.h" />
     <ClInclude Include="Code\Wall.h" />
