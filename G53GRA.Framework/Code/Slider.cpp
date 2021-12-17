@@ -6,44 +6,13 @@
 #define PI acos(-1)
 
 
-/*
-Linear interpolation between point A and B is used to decide where we are
-between these two at time T.
-
-NewPosition = startPosition + currentTime*[(distanceBetweenAandB)/totalTime];
-or
-NewPos = A + T*[(B-A)/totalTime]
-(NewPos = interpA + animateRotation*[(interpB-interpA)/interpTime])
-
-interpA is the position where the animation starts, in this case -15.
-interpB is the position where it end, in this case -45.
-
-interpTime is the total amount of time taken to move between the two
-positions, in this case 1.75 seconds.
-
-Then animateRotation keep track of the amount of time passed between starting
-and ending the animation.
-*/
-
 // MAKE SURE WE INITIALISE OUR VARIABLES
 Slider::Slider() : keyframe(-1), animateTime(0.0), animateRotation(0.0), animateTranslation(0.0),
 interpA(0.0), interpB(0.0), sizeA(0.0), sizeB(0.0), interpTime(0.0) {}
 
-/// Update the Slider position in releation to delta time by use of mathematical
-/// mechanics, eq SUVAT
+
 void Slider::Update(const double& deltaTime)
 {
-	// update the time and rotation steps
-	animateTime += static_cast<float>(deltaTime);
-	animateRotation += static_cast<float>(deltaTime);
-	float g = 9.8f;
-	float l = 8;
-	float T = float(2 * PI * sqrt(l / g));
-
-	sizeA = 30 * float(sin(g * (animateTime - T / 4) / l));
-
-
-
 }
 
 ///Draw the Slider
@@ -169,7 +138,7 @@ void Slider::DrawSliderPlatform()
 	DrawCube();
 	glPopMatrix();
 
-	//四条竖的
+	// four long columns
 	glPushMatrix();
 	glTranslatef(-72, 0.f, 72);
 	drawCylinder(3, 80);
@@ -187,7 +156,7 @@ void Slider::DrawSliderPlatform()
 	drawCylinder(3, 80);
 	glPopMatrix();
 
-	// 长一点的两个横的
+	// horizontal cylinders
 	glPushMatrix();
 	glTranslatef(0, 40.f, 72);
 	glRotatef(-90, 0, 0, 1);
@@ -202,7 +171,7 @@ void Slider::DrawSliderPlatform()
 	drawCylinder(3, 144);
 	glPopMatrix();
 
-	//短的横的
+	// short horizontals
 	glPushMatrix();
 	glTranslatef(72, 40.f, 62);
 	glRotatef(-90, 1, 0, 0);
@@ -236,7 +205,7 @@ void Slider::DrawSliderPlatform()
 	glColor3ub(240, 190, 0);
 	glRotatef(180, 0, 1, 0);
 
-	//四条竖的
+	// four columns
 	glPushMatrix();
 	glTranslatef(-72, 0.f, 72);
 	drawCylinder(3, 80);
@@ -254,7 +223,7 @@ void Slider::DrawSliderPlatform()
 	drawCylinder(3, 80);
 	glPopMatrix();
 
-	// 长一点的两个横的
+	// horizontal cylinders
 	glPushMatrix();
 	glTranslatef(0, 40.f, 72);
 	glRotatef(-90, 0, 0, 1);
@@ -269,7 +238,7 @@ void Slider::DrawSliderPlatform()
 	drawCylinder(3, 144);
 	glPopMatrix();
 
-	//短的横的
+	// short horizontals
 	glPushMatrix();
 	glTranslatef(72, 40.f, 62);
 	glRotatef(-90, 1, 0, 0);
@@ -301,6 +270,7 @@ void Slider::DrawSliderPlatform()
 	glPopMatrix();
 }
 
+//stairs for climbing up 
 void Slider::DrawSliderStair()
 {
 	glPushMatrix();
@@ -335,6 +305,8 @@ void Slider::DrawSliderStair()
 	glPopMatrix();
 }
 
+
+// slider
 void Slider::DrawSliderSlider()
 {
 	glPushMatrix();

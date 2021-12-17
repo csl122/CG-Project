@@ -66,30 +66,10 @@ void Triangle::Display()
 void Triangle::Update(const double& deltaTime)
 {
 	zrot += 30.0f * static_cast<float>(deltaTime);
-
-	//float x, y, z;
-	//Camera* camera = Scene::GetCamera();
-	//camera->GetEyePosition(x, y, z);
-	//
-	//if (abs(x - 0) < 200 && abs(z - (-570)) < 10 && abs(y - (1350)) < 10)
-	//{
-	//	//camera->Reset();
-	//	camera->SetCameraPosition(0.f, 50.f, 935.f); //(0.f ,50.f, 935.f)(0., 1350.0f, 500.)
-	//}
 }
 
 /// set scale variables based on a key press
 void Triangle::HandleKey(unsigned char key, int state, int x, int y)
 {
-	switch (key)
-	{
-		case 'i':
-			scale += 0.1f;
-			break;
-		case 'k':
-			scale -= 0.1f;
-			break;
-		default:
-			break;
-	}
+
 }

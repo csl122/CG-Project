@@ -1,5 +1,25 @@
-﻿  ModelObject.cpp
+﻿  Bullet.cpp
+  Doll.cpp
+  Face.cpp
+  Functions.cpp
+  Head.cpp
+C:\Users\csl12\OneDrive\Doc\Uni-S7\1-Computer Graphics 3069\Frameworks\base\G53GRA.Framework\Code\Head.cpp(260,41): warning C4838: 从“double”转换到“GLfloat”需要收缩转换
+C:\Users\csl12\OneDrive\Doc\Uni-S7\1-Computer Graphics 3069\Frameworks\base\G53GRA.Framework\Code\Head.cpp(260,41): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+C:\Users\csl12\OneDrive\Doc\Uni-S7\1-Computer Graphics 3069\Frameworks\base\G53GRA.Framework\Code\Head.cpp(288,37): warning C4838: 从“double”转换到“GLfloat”需要收缩转换
+C:\Users\csl12\OneDrive\Doc\Uni-S7\1-Computer Graphics 3069\Frameworks\base\G53GRA.Framework\Code\Head.cpp(288,37): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+C:\Users\csl12\OneDrive\Doc\Uni-S7\1-Computer Graphics 3069\Frameworks\base\G53GRA.Framework\Code\Head.cpp(288,59): warning C4838: 从“double”转换到“GLfloat”需要收缩转换
+C:\Users\csl12\OneDrive\Doc\Uni-S7\1-Computer Graphics 3069\Frameworks\base\G53GRA.Framework\Code\Head.cpp(288,59): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+C:\Users\csl12\OneDrive\Doc\Uni-S7\1-Computer Graphics 3069\Frameworks\base\G53GRA.Framework\Code\Head.cpp(288,81): warning C4838: 从“double”转换到“GLfloat”需要收缩转换
+C:\Users\csl12\OneDrive\Doc\Uni-S7\1-Computer Graphics 3069\Frameworks\base\G53GRA.Framework\Code\Head.cpp(288,81): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+  ModelObject.cpp
+  ObjectFileReader.cpp
+  Soldier.cpp
+C:\Users\csl12\OneDrive\Doc\Uni-S7\1-Computer Graphics 3069\Frameworks\base\G53GRA.Framework\Code\Soldier.cpp(192,16): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  SoldierShooting.cpp
+  Timer.cpp
+  TimeTunnel.cpp
   MyScene.cpp
-  main.cpp
+  WorldObject.cpp
+  Camera.cpp
   正在生成代码...
   G53GRA.Framework.vcxproj -> C:\Users\csl12\OneDrive\Doc\Uni-S7\1-Computer Graphics 3069\Frameworks\base\Debug\base.exe

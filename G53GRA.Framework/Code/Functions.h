@@ -7,7 +7,6 @@ constexpr auto _DEF_Z = -500.0f;
 #include <iostream>
 
 #include "Vertex.h"
-#include "Tri.h"
 
 #include "DisplayableObject.h"
 #include "Animation.h"

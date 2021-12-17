@@ -15,6 +15,7 @@
 #include "SoldierShooting.h"
 #include "Bullet.h"
 #include "Timer.h"
+#include "Light.h"
 
 MyScene::MyScene(int argc, char** argv, const char *title, const int& windowWidth, const int& windowHeight)
 	: Scene(argc, argv, title, windowWidth, windowHeight){}
@@ -41,6 +42,7 @@ void MyScene::Initialise()
 	Swing* sw = new Swing();
 	Slider* sl = new Slider();
 	Doors* dr = new Doors();
+	Light* lt = new Light();
 	f->size(100.0f);
 	r->size(100.0f);
 	w->size(100.0f);
@@ -68,6 +70,7 @@ void MyScene::Initialise()
 	AddObjectToScene(fw);
 	AddObjectToScene(sw);
 	AddObjectToScene(sl);
+	AddObjectToScene(lt);
 	
 
 	// soldierLeft

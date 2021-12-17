@@ -247,6 +247,7 @@ void Head::Update(const double& deltaTime) {
 			if (_flagMove && abs(y - (50)) < 20)
 			{
 				_flagLose = true;
+				animateRotation = 0;
 				Soldier::SetLose(true);
 				musicEngine->removeAllSoundSources();
 				musicEngine->play2D("./Media/lose.mp3", false);
@@ -283,6 +284,10 @@ void Head::Update(const double& deltaTime) {
 			glLightfv(GL_LIGHT4, GL_POSITION, position4);
 			glEnable(GL_LIGHT4);
 
+			// global
+			GLfloat global_ambient[] = { 0.05+0.2f * scale ,  0.05 + 0.2f * scale,  0.05 + 0.2f * scale };
+			glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
+
 			// spotlight 5
 			scale = 1 - scale;
 			GLfloat ambience5[] = { 0.2f * scale, 0.0f * scale, 0.0f * scale, 1.0f };
@@ -298,6 +303,7 @@ void Head::Update(const double& deltaTime) {
 			glLightfv(GL_LIGHT5, GL_SPOT_DIRECTION, spot5_direction);//direction
 			glLightf(GL_LIGHT5, GL_SPOT_EXPONENT, 10.5);
 			glEnable(GL_LIGHT5);
+
 		}
 		else
 		{
@@ -329,6 +335,10 @@ void Head::Update(const double& deltaTime) {
 		
 		_flagStart = true;
 		glEnable(GL_LIGHT0);
+		glDisable(GL_LIGHT1);
+		glDisable(GL_LIGHT2);
+		GLfloat global_ambient[] = { 0.2f, 0.2f, 0.2f, 1.0f };
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
 		musicEngine->removeSoundSource("./Media/back1.wav");
 		musicEngine->play2D("./Media/wood.mp3", true);
 	}
@@ -360,6 +370,8 @@ void Head::Update(const double& deltaTime) {
 		glDisable(GL_LIGHT0);
 		glDisable(GL_LIGHT4);
 		glDisable(GL_LIGHT5);
+		GLfloat global_ambient[] = { 0.05f, 0.05f, 0.05f, 1.0f };
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
 		Soldier::SetLose(false);
 	}
 

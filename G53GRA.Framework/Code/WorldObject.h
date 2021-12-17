@@ -4,7 +4,6 @@
 #include <iostream>
 
 
-#include "Tri.h"
 #include "Functions.h"
 #include "MyScene.h"
 
@@ -33,7 +32,6 @@ private:
 
 	MyScene* scene;
 
-	vector<Tri*> polygons;
 
 	GLboolean _iKey, _jKey, _kKey, _lKey, _oKey, _uKey;
 	GLboolean _plusKey, _minusKey, _upKey, _downKey, _leftKey, _rightKey;

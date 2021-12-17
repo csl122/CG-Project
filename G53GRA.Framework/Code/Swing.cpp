@@ -6,31 +6,10 @@
 #define PI acos(-1)
 
 
-/*
-Linear interpolation between point A and B is used to decide where we are
-between these two at time T.
-
-NewPosition = startPosition + currentTime*[(distanceBetweenAandB)/totalTime];
-or
-NewPos = A + T*[(B-A)/totalTime]
-(NewPos = interpA + animateRotation*[(interpB-interpA)/interpTime])
-
-interpA is the position where the animation starts, in this case -15.
-interpB is the position where it end, in this case -45.
-
-interpTime is the total amount of time taken to move between the two
-positions, in this case 1.75 seconds.
-
-Then animateRotation keep track of the amount of time passed between starting
-and ending the animation.
-*/
-
-// MAKE SURE WE INITIALISE OUR VARIABLES
 Swing::Swing() : keyframe(-1), animateTime(0.0), animateRotation(0.0), animateTranslation(0.0),
 interpA(0.0), interpB(0.0), sizeA(0.0), sizeB(0.0), interpTime(0.0) {}
 
-/// Update the Swing position in releation to delta time by use of mathematical
-/// mechanics, eq SUVAT
+/// Update the Swing position in releation to delta time by use of physical formula
 void Swing::Update(const double& deltaTime)
 {
 	// update the time and rotation steps

@@ -33,26 +33,25 @@ void ObjectFileReader::Load() {
 		if (firstWord.length() == 0) continue; // skip if no first word found
 
 		if (firstWord == "v") {
-			// Line denotes a vertex, add to list
+			// vertex
 			vertices.push_back(ParseVector(lineStream));
 		}
 		else if (firstWord == "vt") {
-			// Line denotes a texture coordinate
+			// vertex texture coordinate
 			textureCoordinates.push_back(ParseTextureCoordinate(lineStream));
 		}
 		else if (firstWord == "vn") {
-			// Line denotes a normal
+			// vertex normal
 			normals.push_back(ParseVector(lineStream));
 		}
 		else if (firstWord == "f") {
-			// Line denotes a face
+			// face
 			if (noRender) continue;
 			faces.push_back(ParseObjectFace(lineStream));
-			//faceMaterials.push_back(0);
 
 		}
 		else if (firstWord == "usemtl") {
-			// Line denotes a material name
+			// material used: not fully implemented
 			string materialName;
 			lineStream >> materialName;
 			if (materialName == "material_norender") {
@@ -61,7 +60,6 @@ void ObjectFileReader::Load() {
 			}
 			else {
 				noRender = false;
-				//currentMaterial = //faceMaterials.end()++ ;
 			}
 		}
 
@@ -82,17 +80,12 @@ float* ObjectFileReader::ParseTextureCoordinate(stringstream& ls) {
 }
 
 Face* ObjectFileReader::ParseObjectFace(stringstream& ls) {
-	// Able to read obj files that use either 3 or 4 vertex polygons (triangles/quads)
-	//int ** res = new int*[4];
+	// 3 or 4 vertex polygons (triangles/quads)
 	Face* face = new Face();
 
 	string encodedFace;
 
 	while (ls >> encodedFace) {
-		//cout << encodedFace;
-	//for (int i = 0; i < 4; i++) {
-
-		//ls >> encodedFace;
 
 		Vertex* data = new Vertex();
 		data->x = -1; // vertex position
@@ -105,17 +98,16 @@ Face* ObjectFileReader::ParseObjectFace(stringstream& ls) {
 		bool textureCoordinateExists = secondPos - firstPos > 1;
 		bool normalCoordinateExists = encodedFace.length() - secondPos > 1;
 
-		data->x = (float)stoi(encodedFace.substr(0, firstPos).c_str()) - 1; // position of the current vertex in the file
+		data->x = (float)stoi(encodedFace.substr(0, firstPos).c_str()) - 1; // index of the current vertex in the file
 
 		if (textureCoordinateExists)
-			data->y = (float)stoi(encodedFace.substr(firstPos + 1, secondPos - firstPos).c_str()) - 1; // position of the texture coordinate
+			data->y = (float)stoi(encodedFace.substr(firstPos + 1, secondPos - firstPos).c_str()) - 1; // index of the texture coordinate
 
 		if (normalCoordinateExists)
-			data->z = (float)stoi(encodedFace.substr(secondPos + 1, encodedFace.length() - secondPos).c_str()) - 1; // position of the material coordinate
+			data->z = (float)stoi(encodedFace.substr(secondPos + 1, encodedFace.length() - secondPos).c_str()) - 1; // index of the material coordinate
 
 		face->faceData->push_back(data);
 	}
-	//cout << endl;
 
 	return face;
 }

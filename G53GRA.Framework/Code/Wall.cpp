@@ -33,7 +33,8 @@ void Wall::Display()
 	}
 	glPopMatrix();
 
-
+	
+	//Draw fense
 	glPushMatrix();
 		glTranslatef(-1100, -100, -1098);
 

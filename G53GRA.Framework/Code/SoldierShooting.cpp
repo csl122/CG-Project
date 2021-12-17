@@ -12,7 +12,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 
 	_obj_path = "./Obj/soldierShooting.obj";
 	_tex_path = "./Textures/soldierShooting.bmp";
-	//_tex_path2 = "Texture/" + fileName + "2.bmp";
 	defaultColor = color;
 
 	objectFileReader = new ObjectFileReader(_obj_path);
@@ -43,9 +42,6 @@ _upKey(false), _downKey(false), _leftKey(false), _rightKey(false)
 
 	size(_INIT_SIZE);
 	pos[2] = _DEF_Z * 2;
-
-
-	//_texID2 = scene->GetTexture(_tex_path2);
 }
 
 
@@ -65,7 +61,6 @@ void SoldierShooting::Display() {
 	glTranslatef(pos[0], pos[1], pos[2]);
 	glScalef(scale[0], scale[1], scale[2]);
 
-	//rotation[0] = -90.0f;
 
 
 	glRotatef(rotation[1], 0.0f, 1.0f, 0.0f); // angle ry about (0,1,0)
@@ -74,8 +69,6 @@ void SoldierShooting::Display() {
 
 	glMaterialfv(GL_FRONT, GL_AMBIENT, _mat_ambient);
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, _mat_diffuse);
-	//glMaterialfv(GL_FRONT, GL_SPECULAR, _mat_specular);
-	//glMaterialf(GL_FRONT, GL_SHININESS, _mat_shininess[0]);
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, _texID);
 	glColor3f(1, 1, 1);
@@ -89,21 +82,9 @@ void SoldierShooting::Display() {
 }
 
 void SoldierShooting::Render() {
-	//glEnable(GL_TEXTURE_2D);
-	//glEnable(GL_COLOR_MATERIAL);
-
-	//glBindTexture(GL_TEXTURE_2D, textureId);
-	//float light_position[] = { 0.0f, 1.0f, 0.0f, 0.0f };
-	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-	//glColor3f(defaultColor->x, defaultColor->y, defaultColor->z);
-
-	//auto alreadyRenderedFaces = false;
-	//auto currentTextureId = Materials::NONE;
 
 
 	for (size_t faceId = 0; faceId < faces.size(); faceId++) {
-		//auto faceMaterial = faceMaterials[faceId];
-		//auto textureChanged = faceMaterial != currentTexture;
 
 		Face* face = faces[faceId];
 		glColor3f(1.f, 1.f, 1.f);
@@ -149,7 +130,6 @@ void SoldierShooting::RenderVertex(int vertexIndex) {
 void SoldierShooting::RenderNormal(int normalIndex) {
 	auto normal = normals[normalIndex];
 	glNormal3f(normal->x, normal->y, normal->z);
-	//glColor3f(normal->x, normal->y, normal->z);
 }
 
 void SoldierShooting::RenderMaterial(int materialIndex) {
@@ -168,7 +148,6 @@ void SoldierShooting::setScale(Vertex* size) {
 
 void SoldierShooting::setPosition(Vertex* position) {
 	this->vPosition = position;
-	//position(vPosition->x, vPosition->y, vPosition->z);
 	pos[0] = vPosition->x;
 	pos[1] = vPosition->y;
 	pos[2] = vPosition->z;
@@ -189,6 +168,7 @@ void SoldierShooting::Update(const double& deltaTime) {
 	Camera* camera = Scene::GetCamera();
 	camera->GetEyePosition(x, y, z);
 
+	//calculating facing direction
 	float x1 = pos[0];
 	float z1 = -pos[2];
 	float x2 = x - pos[0];
