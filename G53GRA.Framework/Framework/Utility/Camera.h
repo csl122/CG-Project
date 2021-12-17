@@ -116,6 +116,7 @@ private:
 	int windowWidth, windowHeight;
 
 	int musicflat = 1;
+	float animateTime;
 
 	/** Variable to remember mouse click */
 	int currentButton;
