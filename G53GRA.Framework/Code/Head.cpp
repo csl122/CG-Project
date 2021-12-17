@@ -2,9 +2,10 @@
 #include "Soldier.h"
 
 bool Head::_flagStart = false;
+bool Head::ifWin = false;
 
 Head::Head(MyScene* scene, string fileName, Vertex* color, int winding) : WorldObject(scene, 0, "test", 0),
-scene(scene), _flagAutospin(false), ifWin(false), keyframe(-1), animateTime(0.0), animateRotation(0.0), interpA(0.0), interpB(0.0), interpTime(0.0),
+scene(scene), _flagAutospin(false), keyframe(-1), animateTime(0.0), animateRotation(0.0), interpA(0.0), interpB(0.0), interpTime(0.0),
 _flagReset(false), _iKey(false), _jKey(false), _kKey(false),
 _lKey(false), _oKey(false), _uKey(false), _plusKey(false), _minusKey(false),
 _upKey(false), _downKey(false), _leftKey(false), _rightKey(false), _flagMove(false), _flagLose(false)
@@ -185,7 +186,7 @@ void Head::Update(const double& deltaTime) {
 	float x, y, z;
 	Camera* camera = Scene::GetCamera();
 	camera->GetEyePosition(x, y, z);
-
+	_flagLose = Soldier::_flagLose;
 	
 
 	if (!ifWin && !_flagLose && _flagStart)
@@ -275,7 +276,7 @@ void Head::Update(const double& deltaTime) {
 				musicEngine->play2D("./Media/lose.mp3", false);
 				musicEngine->play2D("./Media/gun.mp3", false);
 
-				printf("los!!!!!!!");
+				
 			}
 			GLfloat spot3_direction[] = { 0.0,-1 - -1.0 *(animateRotation/interpTime),1.0 };
 			glLightfv(GL_LIGHT3, GL_SPOT_DIRECTION, spot3_direction);

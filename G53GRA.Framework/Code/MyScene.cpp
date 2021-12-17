@@ -15,6 +15,7 @@
 #include "Head.h"
 #include "SoldierShooting.h"
 #include "Bullet.h"
+#include "Timer.h"
 
 MyScene::MyScene(int argc, char** argv, const char *title, const int& windowWidth, const int& windowHeight)
 	: Scene(argc, argv, title, windowWidth, windowHeight){}
@@ -128,6 +129,13 @@ AddObjectToScene(dr);
 	bullet->setPosition(BulletP);
 	bullet->setOrientation(new Vertex(0, 0, 0));
 	AddObjectToScene(bullet);
+
+	Vertex* TimerP = new Vertex(0, -100, -900);
+	Timer* timer = new Timer(this, "0", new Vertex(.9677f, .1176f, .1176f), GL_CCW);
+	timer->setScale(objScale);
+	timer->setPosition(TimerP);
+	timer->setOrientation(new Vertex(0, 0, 0));
+	AddObjectToScene(timer);
 }
 
 /// set the perspective of camera

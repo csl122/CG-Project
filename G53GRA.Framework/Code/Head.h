@@ -40,7 +40,7 @@ public:
 	string _tex_path;
 	string _tex_path2;
 	string _filename;
-	bool ifWin;
+	static bool ifWin;
 	static bool _flagStart;
 
 	int _texID;
